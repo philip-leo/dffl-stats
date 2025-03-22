@@ -33,6 +33,20 @@ else:
     st.error("Player mapping CSV file not found. Please ensure 'player_mapping.csv' is in the repository.")
     st.stop()
 
+# Load the league mapping CSV file (contains DFFL teams for 2023, 2024, 2025)
+league_mapping_path = "league_mapping.csv"
+if os.path.exists(league_mapping_path):
+    print("Loading league mapping CSV...")
+    try:
+        league_mapping = pd.read_csv(league_mapping_path)
+        print("League mapping CSV loaded successfully!")
+    except Exception as e:
+        st.error(f"Error loading league mapping CSV: {str(e)}")
+        st.stop()
+else:
+    st.error("League mapping CSV file not found. Please ensure 'league_mapping.csv' is in the repository.")
+    st.stop()
+
 # Convert Spielernummer to integer in both dataframes to ensure matching
 df["Spielernummer"] = df["Spielernummer"].astype(int)
 player_mapping["Spielernummer"] = player_mapping["Spielernummer"].astype(int)
@@ -41,6 +55,37 @@ player_mapping["Spielernummer"] = player_mapping["Spielernummer"].astype(int)
 df = df.merge(
     player_mapping[["Team", "Spielernummer", "Name"]],
     on=["Team", "Spielernummer"],
+    how="left"
+)
+
+# Create a complete league mapping for all teams and years
+# Step 1: Get all unique team-year combinations from the main dataframe
+team_year_combinations = df[["Jahr", "Team"]].drop_duplicates()
+
+# Step 2: Initialize the league column based on the year
+team_year_combinations["League"] = team_year_combinations["Jahr"].apply(
+    lambda x: "Combined" if x <= 2022 else "Other Leagues"
+)
+
+# Step 3: Merge with the DFFL teams from league_mapping.csv
+# Convert Year in league_mapping to integer to match Jahr
+league_mapping["Year"] = league_mapping["Year"].astype(int)
+complete_league_mapping = team_year_combinations.merge(
+    league_mapping[["Year", "Team", "League"]],
+    left_on=["Jahr", "Team"],
+    right_on=["Year", "Team"],
+    how="left",
+    suffixes=("", "_dffl")
+)
+
+# Step 4: Update the League column where DFFL data exists
+complete_league_mapping["League"] = complete_league_mapping["League_dffl"].combine_first(complete_league_mapping["League"])
+complete_league_mapping = complete_league_mapping[["Jahr", "Team", "League"]]
+
+# Step 5: Merge the complete league mapping into the main dataframe
+df = df.merge(
+    complete_league_mapping,
+    on=["Jahr", "Team"],
     how="left"
 )
 
@@ -56,23 +101,51 @@ tab1, tab2, tab3, tab4 = st.tabs(["Top Players", "Player Stats", "Team Stats", "
 with tab1:
     st.header("Top Players")
 
-    # Dropdown for selecting the year
+    # Dropdown for selecting the year (default to 2025)
     years = sorted(df["Jahr"].unique())
-    selected_year = st.selectbox("Select Year", years, key="top_players_year")
+    default_year = 2025 if 2025 in years else years[-1]  # Fallback to the latest year if 2025 isn't available
+    selected_year = st.selectbox(
+        "Select Year",
+        years,
+        index=years.index(default_year),
+        key="top_players_year"
+    )
 
-    # Dropdown for selecting the team (with "All" as the default option)
+    # Dropdown for selecting the team (default to "All")
     teams = sorted(df["Team"].unique())
     team_options = ["All"] + teams
-    selected_team = st.selectbox("Select Team", team_options, index=0, key="top_players_team")
+    selected_team = st.selectbox(
+        "Select Team",
+        team_options,
+        index=0,  # "All" is the first option
+        key="top_players_team"
+    )
 
-    # Dropdown for selecting the event type
+    # Dropdown for selecting the league (default to "All")
+    league_options = ["All"] + sorted(df["League"].unique())
+    selected_league = st.selectbox(
+        "Select League",
+        league_options,
+        index=0,  # "All" is the first option
+        key="top_players_league"
+    )
+
+    # Dropdown for selecting the event type (default to "Touchdowns")
     event_types = sorted(df["Event"].unique())
-    selected_event_type = st.selectbox("Select Event Type", event_types, key="top_players_event_type")
+    default_event = "Touchdowns" if "Touchdowns" in event_types else event_types[0]  # Fallback to the first event type if "Touchdowns" isn't available
+    selected_event_type = st.selectbox(
+        "Select Event Type",
+        event_types,
+        index=event_types.index(default_event),
+        key="top_players_event_type"
+    )
 
     # Filter data based on selections
     filtered_df = df[(df["Jahr"] == selected_year) & (df["Event"] == selected_event_type)]
     if selected_team != "All":
         filtered_df = filtered_df[filtered_df["Team"] == selected_team]
+    if selected_league != "All":
+        filtered_df = filtered_df[filtered_df["League"] == selected_league]
 
     # Group by Team and Spielernummer to ensure all players are included, then merge back the Name
     top_players = filtered_df.groupby(["Team", "Spielernummer"]).agg({"Anzahl": "sum"}).reset_index()
@@ -85,7 +158,11 @@ with tab1:
     top_players = top_players.sort_values(by="Anzahl", ascending=False).head(50)
 
     # Display the top players in a table
-    st.subheader(f"Top 50 Players for {selected_event_type} in {selected_year}" + (f" (Team: {selected_team})" if selected_team != "All" else ""))
+    st.subheader(
+        f"Top 50 Players for {selected_event_type} in {selected_year}" +
+        (f" (Team: {selected_team})" if selected_team != "All" else "") +
+        (f" (League: {selected_league})" if selected_league != "All" else "")
+    )
     if not top_players.empty:
         # Create a clickable table with Player Number, Player (Name), Team, and Count
         top_players_display = top_players[["Spielernummer", "Name", "Team", "Anzahl"]].rename(
@@ -108,7 +185,7 @@ with tab1:
             st.session_state.active_tab = "Player Stats"
             st.rerun()
     else:
-        st.write("No data available for the selected year, team, and event type.")
+        st.write("No data available for the selected year, team, league, and event type.")
 
 with tab2:
     st.header("Player Stats")
@@ -269,7 +346,8 @@ with tab4:
             "Anzahl": "Count",
             "Jahr": "Year",
             "Event": "Event Type",
-            "Team": "Team"
+            "Team": "Team",
+            "League": "League"
         }
     )
     st.write(raw_data_display)
