@@ -121,18 +121,19 @@ with tab1:
         key="top_players_team"
     )
 
-    # Dropdown for selecting the league (default to "All")
+    # Dropdown for selecting the league (default to "DFFL")
     league_options = ["All"] + sorted(df["League"].unique())
+    default_league = "DFFL" if "DFFL" in league_options else league_options[0]  # Fallback to the first option if "DFFL" isn't available
     selected_league = st.selectbox(
         "Select League",
         league_options,
-        index=0,  # "All" is the first option
+        index=league_options.index(default_league),
         key="top_players_league"
     )
 
-    # Dropdown for selecting the event type (default to "Touchdowns")
+    # Dropdown for selecting the event type (default to "Touchdown")
     event_types = sorted(df["Event"].unique())
-    default_event = "Touchdowns" if "Touchdowns" in event_types else event_types[0]  # Fallback to the first event type if "Touchdowns" isn't available
+    default_event = "Touchdown" if "Touchdown" in event_types else event_types[0]  # Fallback to the first event type if "Touchdown" isn't available
     selected_event_type = st.selectbox(
         "Select Event Type",
         event_types,
@@ -216,18 +217,21 @@ with tab2:
             fill_value=0
         )
 
+        # Convert the index (Jahr) to string to avoid Arrow serialization issues
+        pivot_table.index = pivot_table.index.astype(str)
+
         # Calculate the total row
         total_row = pivot_table.sum().to_frame().T
         total_row.index = ["Total"]
 
-        # Concatenate the total row to the pivot table
+        # Append the Total row to the pivot table
         pivot_table = pd.concat([pivot_table, total_row])
 
         # Rename columns for display
         pivot_table.index.name = "Year"
         pivot_table.columns.name = "Event Type"
 
-        # Display the pivot table with styling for the Total row
+        # Display the pivot table with the Total row styled
         st.subheader(f"Event Counts for {player_name} (Player {selected_player}, Team: {selected_team})")
         st.dataframe(
             pivot_table.style.apply(
@@ -279,18 +283,21 @@ with tab3:
             fill_value=0
         )
 
+        # Convert the index (Jahr) to string to avoid Arrow serialization issues
+        pivot_table.index = pivot_table.index.astype(str)
+
         # Calculate the total row
         total_row = pivot_table.sum().to_frame().T
         total_row.index = ["Total"]
 
-        # Concatenate the total row to the pivot table
+        # Append the Total row to the pivot table
         pivot_table = pd.concat([pivot_table, total_row])
 
         # Rename columns for display
         pivot_table.index.name = "Year"
         pivot_table.columns.name = "Event Type"
 
-        # Display the pivot table with styling for the Total row
+        # Display the pivot table with the Total row styled
         st.subheader(f"Event Counts for Team {selected_team}")
         st.dataframe(
             pivot_table.style.apply(
