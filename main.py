@@ -2,6 +2,23 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import os
+import base64
+from PIL import Image
+import io
+
+def get_base64_image(image_path, size=(30, 30)):
+    try:
+        if pd.isna(image_path) or not os.path.exists(image_path):
+            return None
+        img = Image.open(image_path)
+        img = img.resize(size)  # Resize image to desired dimensions
+        buffered = io.BytesIO()
+        img.save(buffered, format="PNG")
+        img_str = base64.b64encode(buffered.getvalue()).decode()
+        return f"data:image/png;base64,{img_str}"
+    except Exception as e:
+        print(f"Error processing image {image_path}: {e}")
+        return None
 
 st.title("Flag Football Stats Dashboard")
 
@@ -45,6 +62,20 @@ if os.path.exists(league_mapping_path):
         st.stop()
 else:
     st.error("League mapping CSV file not found. Please ensure 'league_mapping.csv' is in the repository.")
+    st.stop()
+
+# Load the team info CSV file
+team_info_path = "team_info.csv"
+if os.path.exists(team_info_path):
+    print("Loading team info CSV...")
+    try:
+        team_info = pd.read_csv(team_info_path)
+        print("Team info CSV loaded successfully!")
+    except Exception as e:
+        st.error(f"Error loading team info CSV: {str(e)}")
+        st.stop()
+else:
+    st.error("Team info CSV file not found. Please ensure 'team_info.csv' is in the repository.")
     st.stop()
 
 # Convert Spielernummer to integer in both dataframes to ensure matching
@@ -111,16 +142,6 @@ with tab1:
         key="top_players_year"
     )
 
-    # Dropdown for selecting the team (default to "All")
-    teams = sorted(df["Team"].unique())
-    team_options = ["All"] + teams
-    selected_team = st.selectbox(
-        "Select Team",
-        team_options,
-        index=0,  # "All" is the first option
-        key="top_players_team"
-    )
-
     # Dropdown for selecting the league (default to "DFFL")
     league_options = ["All"] + sorted(df["League"].unique())
     default_league = "DFFL" if "DFFL" in league_options else league_options[0]  # Fallback to the first option if "DFFL" isn't available
@@ -143,8 +164,6 @@ with tab1:
 
     # Filter data based on selections
     filtered_df = df[(df["Jahr"] == selected_year) & (df["Event"] == selected_event_type)]
-    if selected_team != "All":
-        filtered_df = filtered_df[filtered_df["Team"] == selected_team]
     if selected_league != "All":
         filtered_df = filtered_df[filtered_df["League"] == selected_league]
 
@@ -161,24 +180,59 @@ with tab1:
     # Display the top players in a table
     st.subheader(
         f"Top 50 Players for {selected_event_type} in {selected_year}" +
-        (f" (Team: {selected_team})" if selected_team != "All" else "") +
         (f" (League: {selected_league})" if selected_league != "All" else "")
     )
     if not top_players.empty:
-        # Create a clickable table with Player Number, Player (Name), Team, and Count
+        # Create a clickable table with Player Number, Player (Name), Team Logo, Team Name, and Count
         top_players_display = top_players[["Spielernummer", "Name", "Team", "Anzahl"]].rename(
-            columns={"Spielernummer": "Player Number", "Name": "Player", "Anzahl": "Count"}
+            columns={"Spielernummer": "Player Number", "Name": "Player", "Team": "Team Name", "Anzahl": "Count"}
         ).reset_index(drop=True)
+
+        # Get team logos from team_info and convert to base64
+        workspace_dir = os.path.dirname(os.path.abspath(__file__))
+        team_logos = {
+            team: get_base64_image(os.path.join(workspace_dir, logo_path)) if pd.notna(logo_path) else None
+            for team, logo_path in zip(team_info['Team'], team_info['LogoPath'])
+        }
+        
+        # Add team logo column with base64 encoded images
+        top_players_display.insert(2, "Team Logo", top_players_display["Team Name"].map(team_logos))
+
+        # Display the table with custom column configurations
         selected_row = st.dataframe(
             top_players_display,
             on_select="rerun",
             selection_mode="single-row",
-            hide_index=True
+            hide_index=True,
+            use_container_width=True,
+            height=len(top_players_display) * 35 + 40,  # Adjust height based on number of rows
+            column_config={
+                "Player Number": st.column_config.NumberColumn(
+                    "#",  # This changes the display name to #
+                    width="small",
+                    help="Player number"
+                ),
+                "Player": st.column_config.TextColumn(
+                    width="medium"
+                ),
+                "Team Logo": st.column_config.ImageColumn(
+                    "Logo",  # Column header
+                    width="small",
+                    help="Team logo"
+                ),
+                "Team Name": st.column_config.TextColumn(
+                    "Team",  # Column header
+                    width="medium"
+                ),
+                "Count": st.column_config.NumberColumn(
+                    width="small"
+                )
+            }
         )
 
         # If a row is selected, update the session state and switch to the Player Stats tab
-        if selected_row["selection"]["rows"]:
-            selected_player_index = selected_row["selection"]["rows"][0]
+        if selected_row is not None and "selected_rows" in selected_row:
+            selected_player_index = selected_row["selected_rows"][0]
             selected_player = top_players.iloc[selected_player_index]["Spielernummer"]
             selected_team = top_players.iloc[selected_player_index]["Team"]
             st.session_state.selected_player = selected_player
@@ -270,6 +324,41 @@ with tab3:
     teams = sorted(df["Team"].unique())
     selected_team = st.selectbox("Select Team", teams, key="team_stats_team")
 
+    # Display team information if available
+    team_info_row = team_info[team_info["Team"] == selected_team]
+    if not team_info_row.empty:
+        # Create two columns for team info
+        col1, col2 = st.columns([1, 2])
+        
+        with col1:
+            # Display team logo if it exists
+            logo_path = team_info_row["LogoPath"].iloc[0]
+            try:
+                if os.path.exists(logo_path):
+                    st.image(logo_path, width=200)
+                else:
+                    st.info("🖼️ Team logo coming soon")
+            except Exception as e:
+                st.info("🖼️ Team logo coming soon")
+        
+        with col2:
+            # Display team information
+            st.subheader(selected_team)
+            
+            # Display description with proper line breaks
+            description = team_info_row["Description"].iloc[0]
+            if pd.notna(description):
+                for line in description.split("\n"):
+                    st.write(line)
+            
+            # Display Instagram link if available
+            instagram_url = team_info_row["InstagramURL"].iloc[0]
+            if pd.notna(instagram_url) and instagram_url:
+                st.markdown(f"[📸 Follow on Instagram]({instagram_url})")
+
+    # Add a separator
+    st.markdown("---")
+
     # Filter data for the selected team
     team_data = df[df["Team"] == selected_team]
 
@@ -326,6 +415,57 @@ with tab3:
             st.plotly_chart(fig)
         else:
             st.write(f"No data available for {selected_event_type} for this team.")
+
+        # New section: Detailed player stats for the selected year
+        st.subheader(f"Player Statistics")
+        
+        # Dropdown for selecting the year (moved here)
+        years = sorted(df["Jahr"].unique())
+        default_year = 2025 if 2025 in years else years[-1]  # Fallback to the latest year if 2025 isn't available
+        selected_year = st.selectbox(
+            "Select Year",
+            years,
+            index=years.index(default_year),
+            key="team_stats_year"
+        )
+
+        # Filter data for the selected team and year
+        team_year_data = df[(df["Team"] == selected_team) & (df["Jahr"] == selected_year)]
+        
+        if not team_year_data.empty:
+            # Get unique players for this team and year
+            players = team_year_data[["Spielernummer", "Name"]].drop_duplicates()
+
+            # Create player stats DataFrame
+            player_stats = []
+            for _, player in players.iterrows():
+                player_data = team_year_data[team_year_data["Spielernummer"] == player["Spielernummer"]]
+                stats = {"Player Number": player["Spielernummer"], "Player Name": player["Name"]}
+                
+                # Add stats for each event type (excluding Overtime and Safety (+1))
+                for event in sorted(df["Event"].unique()):
+                    if event not in ["Overtime", "Safety (+1)"]:
+                        event_count = player_data[player_data["Event"] == event]["Anzahl"].sum()
+                        stats[event] = event_count
+                
+                player_stats.append(stats)
+
+            # Convert to DataFrame
+            player_stats_df = pd.DataFrame(player_stats)
+
+            # Sort by Touchdown in descending order if it exists
+            if "Touchdown" in player_stats_df.columns:
+                player_stats_df = player_stats_df.sort_values("Touchdown", ascending=False)
+
+            # Display the player stats table
+            st.dataframe(
+                player_stats_df,
+                hide_index=True,
+                use_container_width=True,
+                height=len(player_stats_df) * 35 + 40  # Adjust height based on number of rows
+            )
+        else:
+            st.write(f"No data available for team {selected_team} in {selected_year}")
     else:
         st.write("No data available for this team.")
 
