@@ -159,7 +159,7 @@ print("Sample of player_mapping data:")
 print(player_mapping.head())
 
 # Create a copy of player_mapping with just the columns we need
-player_mapping_subset = player_mapping[["Team", "Spielernummer", "First Name", "Last Name"]].copy()
+player_mapping_subset = player_mapping[["Team", "Spielernummer", "Name"]].copy()
 print("\nColumns in player_mapping_subset:", player_mapping_subset.columns.tolist())
 
 # Merge the player names into the main dataframe
@@ -173,15 +173,6 @@ try:
     
     print("\nPost-merge validation:")
     print("Columns in merged dataframe:", df.columns.tolist())
-    
-    # Create a complete name column by concatenating First Name and Last Name
-    df["Name"] = df.apply(
-        lambda x: f"{str(x['First Name']).strip() if pd.notna(x['First Name']) else ''} {str(x['Last Name']).strip() if pd.notna(x['Last Name']) else ''}".strip(),
-        axis=1
-    )
-    
-    # Drop the separate name columns as we don't need them anymore
-    df = df.drop(columns=["First Name", "Last Name"])
     
 except Exception as e:
     print(f"Debug: Error during merge: {str(e)}")
