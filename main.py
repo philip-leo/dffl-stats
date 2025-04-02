@@ -152,14 +152,27 @@ print(df[["Team", "Spielernummer"]].head())
 print("Debug: Sample of player_mapping Team and Spielernummer:")
 print(player_mapping[["Team", "Spielernummer"]].head())
 
+# Print debug information before merge
+print("\nPre-merge validation:")
+print("Available columns in player_mapping:", player_mapping.columns.tolist())
+print("Sample of player_mapping data:")
+print(player_mapping.head())
+
+# Create a copy of player_mapping with just the columns we need
+player_mapping_subset = player_mapping[["Team", "Spielernummer", "First Name", "Last Name"]].copy()
+print("\nColumns in player_mapping_subset:", player_mapping_subset.columns.tolist())
+
 # Merge the player names into the main dataframe
 try:
     df = df.merge(
-        player_mapping[["Team", "Spielernummer", "First Name", "Last Name"]],
+        player_mapping_subset,
         on=["Team", "Spielernummer"],
         how="left",
         validate="m:1"  # many-to-one relationship
     )
+    
+    print("\nPost-merge validation:")
+    print("Columns in merged dataframe:", df.columns.tolist())
     
     # Create a complete name column by concatenating First Name and Last Name
     df["Name"] = df.apply(
@@ -172,6 +185,10 @@ try:
     
 except Exception as e:
     print(f"Debug: Error during merge: {str(e)}")
+    print("Debug: DataFrame info:")
+    print(df.info())
+    print("\nDebug: Player mapping info:")
+    print(player_mapping.info())
     st.error(f"Error merging player data: {str(e)}")
     st.stop()
 
