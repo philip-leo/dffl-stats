@@ -98,21 +98,43 @@ else:
     st.stop()
 
 # Convert Spielernummer to integer in both dataframes to ensure matching
-df["Spielernummer"] = df["Spielernummer"].astype(int)
-player_mapping["Spielernummer"] = player_mapping["Spielernummer"].astype(int)
+df["Spielernummer"] = pd.to_numeric(df["Spielernummer"], errors='coerce').astype('Int64')
+player_mapping["Spielernummer"] = pd.to_numeric(player_mapping["Spielernummer"], errors='coerce').astype('Int64')
+
+# Ensure Team column is string type in both dataframes
+df["Team"] = df["Team"].astype(str)
+player_mapping["Team"] = player_mapping["Team"].astype(str)
+
+# Print debug information
+print("Debug: Columns in df:", df.columns.tolist())
+print("Debug: Columns in player_mapping:", player_mapping.columns.tolist())
+print("Debug: Sample of df Team and Spielernummer:")
+print(df[["Team", "Spielernummer"]].head())
+print("Debug: Sample of player_mapping Team and Spielernummer:")
+print(player_mapping[["Team", "Spielernummer"]].head())
 
 # Merge the player names into the main dataframe
-df = df.merge(
-    player_mapping[["Team", "Spielernummer", "First Name", "Last Name"]],
-    on=["Team", "Spielernummer"],
-    how="left"
-)
-
-# Create a complete name column by concatenating First Name and Last Name
-df["Name"] = df.apply(lambda x: f"{x['First Name']} {x['Last Name']}" if pd.notna(x['First Name']) and pd.notna(x['Last Name']) else "", axis=1).str.strip()
-
-# Drop the separate name columns as we don't need them anymore
-df = df.drop(columns=["First Name", "Last Name"])
+try:
+    df = df.merge(
+        player_mapping[["Team", "Spielernummer", "First Name", "Last Name"]],
+        on=["Team", "Spielernummer"],
+        how="left",
+        validate="m:1"  # many-to-one relationship
+    )
+    
+    # Create a complete name column by concatenating First Name and Last Name
+    df["Name"] = df.apply(
+        lambda x: f"{str(x['First Name']).strip() if pd.notna(x['First Name']) else ''} {str(x['Last Name']).strip() if pd.notna(x['Last Name']) else ''}".strip(),
+        axis=1
+    )
+    
+    # Drop the separate name columns as we don't need them anymore
+    df = df.drop(columns=["First Name", "Last Name"])
+    
+except Exception as e:
+    print(f"Debug: Error during merge: {str(e)}")
+    st.error(f"Error merging player data: {str(e)}")
+    st.stop()
 
 # Create a complete league mapping for all teams and years
 # Step 1: Get all unique team-year combinations from the main dataframe
