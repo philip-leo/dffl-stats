@@ -66,7 +66,13 @@ if os.path.exists(player_mapping_path):
     print("Loading player mapping CSV...")
     try:
         player_mapping = pd.read_csv(player_mapping_path)
-        # Print the first few rows of raw data for debugging
+        
+        # Create the Name column by concatenating First Name and Last Name
+        player_mapping["Name"] = player_mapping.apply(
+            lambda x: f"{str(x['First Name']).strip() if pd.notna(x['First Name']) else ''} {str(x['Last Name']).strip() if pd.notna(x['Last Name']) else ''}".strip(),
+            axis=1
+        )
+        
         print("First few rows of player mapping CSV:")
         print(player_mapping.head())
         print("\nColumns in player mapping CSV:", player_mapping.columns.tolist())
@@ -107,11 +113,11 @@ else:
     st.error("Team info CSV file not found. Please ensure 'team_info.csv' is in the repository.")
     st.stop()
 
-# Clean and validate Spielernummer in both dataframes
-print("\nCleaning and validating Spielernummer...")
+# Clean and validate Player Number in both dataframes
+print("\nCleaning and validating Player Number...")
 
-# Function to clean Spielernummer
-def clean_spielernummer(value):
+# Function to clean player number
+def clean_player_number(value):
     if pd.isna(value):
         return None
     try:
@@ -121,23 +127,23 @@ def clean_spielernummer(value):
         cleaned = ''.join(filter(str.isdigit, str_value))
         return int(cleaned) if cleaned else None
     except Exception as e:
-        print(f"Error cleaning Spielernummer value '{value}': {str(e)}")
+        print(f"Error cleaning player number value '{value}': {str(e)}")
         return None
 
-# Clean Spielernummer in both dataframes
-print("Cleaning Spielernummer in main dataframe...")
-df["Spielernummer"] = df["Spielernummer"].apply(clean_spielernummer)
-print("Sample of cleaned Spielernummer in main dataframe:")
-print(df[["Team", "Spielernummer"]].head())
+# Clean Player Number in both dataframes
+print("Cleaning Player Number in main dataframe...")
+df["Player Number"] = df["Player Number"].apply(clean_player_number)
+print("Sample of cleaned Player Number in main dataframe:")
+print(df[["Team", "Player Number"]].head())
 
-print("\nCleaning Spielernummer in player mapping...")
-player_mapping["Spielernummer"] = player_mapping["Spielernummer"].apply(clean_spielernummer)
-print("Sample of cleaned Spielernummer in player mapping:")
-print(player_mapping[["Team", "Spielernummer"]].head())
+print("\nCleaning Player Number in player mapping...")
+player_mapping["Player Number"] = player_mapping["Player Number"].apply(clean_player_number)
+print("Sample of cleaned Player Number in player mapping:")
+print(player_mapping[["Team", "Player Number"]].head())
 
 # Convert to nullable integer type
-df["Spielernummer"] = df["Spielernummer"].astype("Int64")
-player_mapping["Spielernummer"] = player_mapping["Spielernummer"].astype("Int64")
+df["Player Number"] = df["Player Number"].astype("Int64")
+player_mapping["Player Number"] = player_mapping["Player Number"].astype("Int64")
 
 # Ensure Team column is string type in both dataframes
 df["Team"] = df["Team"].astype(str)
@@ -147,26 +153,26 @@ player_mapping["Team"] = player_mapping["Team"].astype(str)
 print("\nFinal validation:")
 print("Debug: Columns in df:", df.columns.tolist())
 print("Debug: Columns in player_mapping:", player_mapping.columns.tolist())
-print("Debug: Sample of df Team and Spielernummer:")
-print(df[["Team", "Spielernummer"]].head())
-print("Debug: Sample of player_mapping Team and Spielernummer:")
-print(player_mapping[["Team", "Spielernummer"]].head())
+print("Debug: Sample of df Team and Player Number:")
+print(df[["Team", "Player Number"]].head())
+print("Debug: Sample of player_mapping Team and Player Number:")
+print(player_mapping[["Team", "Player Number", "Name"]].head())
 
 # Print debug information before merge
 print("\nPre-merge validation:")
 print("Available columns in player_mapping:", player_mapping.columns.tolist())
 print("Sample of player_mapping data:")
-print(player_mapping.head())
+print(player_mapping[["Team", "Player Number", "Name"]].head())
 
 # Create a copy of player_mapping with just the columns we need
-player_mapping_subset = player_mapping[["Team", "Spielernummer", "Name"]].copy()
+player_mapping_subset = player_mapping[["Team", "Player Number", "Name"]].copy()
 print("\nColumns in player_mapping_subset:", player_mapping_subset.columns.tolist())
 
 # Merge the player names into the main dataframe
 try:
     df = df.merge(
         player_mapping_subset,
-        on=["Team", "Spielernummer"],
+        on=["Team", "Player Number"],
         how="left",
         validate="m:1"  # many-to-one relationship
     )
@@ -185,19 +191,19 @@ except Exception as e:
 
 # Create a complete league mapping for all teams and years
 # Step 1: Get all unique team-year combinations from the main dataframe
-team_year_combinations = df[["Jahr", "Team"]].drop_duplicates()
+team_year_combinations = df[["Year", "Team"]].drop_duplicates()
 
 # Step 2: Initialize the league column based on the year
-team_year_combinations["League"] = team_year_combinations["Jahr"].apply(
+team_year_combinations["League"] = team_year_combinations["Year"].apply(
     lambda x: "Combined" if x <= 2022 else "Other Leagues"
 )
 
 # Step 3: Merge with the DFFL teams from league_mapping.csv
-# Convert Year in league_mapping to integer to match Jahr
+# Convert Year in league_mapping to integer to match Year
 league_mapping["Year"] = league_mapping["Year"].astype(int)
 complete_league_mapping = team_year_combinations.merge(
     league_mapping[["Year", "Team", "League"]],
-    left_on=["Jahr", "Team"],
+    left_on=["Year", "Team"],
     right_on=["Year", "Team"],
     how="left",
     suffixes=("", "_dffl")
@@ -205,12 +211,12 @@ complete_league_mapping = team_year_combinations.merge(
 
 # Step 4: Update the League column where DFFL data exists
 complete_league_mapping["League"] = complete_league_mapping["League_dffl"].combine_first(complete_league_mapping["League"])
-complete_league_mapping = complete_league_mapping[["Jahr", "Team", "League"]]
+complete_league_mapping = complete_league_mapping[["Year", "Team", "League"]]
 
 # Step 5: Merge the complete league mapping into the main dataframe
 df = df.merge(
     complete_league_mapping,
-    on=["Jahr", "Team"],
+    on=["Year", "Team"],
     how="left"
 )
 
@@ -225,7 +231,7 @@ tab1, tab2, tab3, tab4 = st.tabs(["Top Players", "Player Stats", "Team Stats", "
 
 with tab1:
     # Dropdown for selecting the year (default to 2025)
-    years = sorted(df["Jahr"].unique())
+    years = sorted(df["Year"].unique())
     default_year = 2025 if 2025 in years else years[-1]
     selected_year = st.selectbox(
         "Select Year",
@@ -255,16 +261,16 @@ with tab1:
     )
 
     # Filter data based on selections
-    filtered_df = df[(df["Jahr"] == selected_year) & (df["Event"] == selected_event_type)]
+    filtered_df = df[(df["Year"] == selected_year) & (df["Event"] == selected_event_type)]
     if selected_league != "All":
         filtered_df = filtered_df[filtered_df["League"] == selected_league]
 
-    # Group by Team and Spielernummer to ensure all players are included, then merge back the Name
-    top_players = filtered_df.groupby(["Team", "Spielernummer"]).agg({"Anzahl": "sum"}).reset_index()
+    # Group by Team and Player Number to ensure all players are included, then merge back the Name
+    top_players = filtered_df.groupby(["Team", "Player Number"]).agg({"Anzahl": "sum"}).reset_index()
     # Merge the Name column back in after grouping
     top_players = top_players.merge(
-        filtered_df[["Team", "Spielernummer", "Name"]].drop_duplicates(),
-        on=["Team", "Spielernummer"],
+        filtered_df[["Team", "Player Number", "Name"]].drop_duplicates(),
+        on=["Team", "Player Number"],
         how="left"
     )
     top_players = top_players.sort_values(by="Anzahl", ascending=False).head(50)
@@ -276,8 +282,8 @@ with tab1:
     )
     if not top_players.empty:
         # Create a clickable table with Player Number, Player (Name), Team Logo, Team Name, and Count
-        top_players_display = top_players[["Spielernummer", "Name", "Team", "Anzahl"]].rename(
-            columns={"Spielernummer": "#", "Name": "Player", "Team": "Team Name", "Anzahl": "Count"}
+        top_players_display = top_players[["Player Number", "Name", "Team", "Anzahl"]].rename(
+            columns={"Player Number": "#", "Name": "Player", "Team": "Team Name", "Anzahl": "Count"}
         ).reset_index(drop=True)
 
         # Get team logos from team_info and convert to base64
@@ -328,27 +334,27 @@ with tab2:
     selected_team = st.selectbox("Select Team", teams, index=teams.index(default_team), key="player_stats_team")
 
     # Dropdown for selecting the player (filtered by team)
-    players = sorted(df[df["Team"] == selected_team]["Spielernummer"].unique())
+    players = sorted(df[df["Team"] == selected_team]["Player Number"].unique())
     default_player = players[0]
     selected_player = st.selectbox("Select Player", players, index=players.index(default_player), key="player_stats_player")
 
     # Get the player's name (if available)
-    player_name = df[(df["Team"] == selected_team) & (df["Spielernummer"] == selected_player)]["Name"].iloc[0] if not df[(df["Team"] == selected_team) & (df["Spielernummer"] == selected_player)]["Name"].isna().all() else "Unknown"
+    player_name = df[(df["Team"] == selected_team) & (df["Player Number"] == selected_player)]["Name"].iloc[0] if not df[(df["Team"] == selected_team) & (df["Player Number"] == selected_player)]["Name"].isna().all() else "Unknown"
 
     # Filter data for the selected player and team
-    player_data = df[(df["Spielernummer"] == selected_player) & (df["Team"] == selected_team)]
+    player_data = df[(df["Player Number"] == selected_player) & (df["Team"] == selected_team)]
 
     # Create a pivot table for career statistics
     if not player_data.empty:
         pivot_table = player_data.pivot_table(
             values="Anzahl",
-            index="Jahr",
+            index="Year",
             columns="Event",
             aggfunc="sum",
             fill_value=0
         )
 
-        # Convert the index (Jahr) to string to avoid Arrow serialization issues
+        # Convert the index (Year) to string to avoid Arrow serialization issues
         pivot_table.index = pivot_table.index.astype(str)
 
         # Calculate the total row
@@ -378,18 +384,18 @@ with tab2:
     selected_event_type = st.selectbox("Select Event Type", event_types, key="player_stats_event_type")
 
     # Filter data for the selected event type
-    event_data = player_data[player_data["Event"] == selected_event_type].groupby("Jahr")["Anzahl"].sum().reset_index()
+    event_data = player_data[player_data["Event"] == selected_event_type].groupby("Year")["Anzahl"].sum().reset_index()
 
     # Plot count over time for the selected event type
     if not event_data.empty:
         fig = px.bar(
             event_data,
-            x="Jahr",
+            x="Year",
             y="Anzahl",
             title=f"Count of {selected_event_type} for {player_name} Over Time",
-            labels={"Jahr": "Year", "Anzahl": "Count"},
+            labels={"Year": "Year", "Anzahl": "Count"},
         )
-        fig.update_xaxes(tickvals=event_data["Jahr"].astype(int))
+        fig.update_xaxes(tickvals=event_data["Year"].astype(int))
         st.plotly_chart(fig)
     else:
         st.write(f"No data available for {selected_event_type} for this player.")
@@ -440,13 +446,13 @@ with tab3:
     if not team_data.empty:
         pivot_table = team_data.pivot_table(
             values="Anzahl",
-            index="Jahr",
+            index="Year",
             columns="Event",
             aggfunc="sum",
             fill_value=0
         )
 
-        # Convert the index (Jahr) to string to avoid Arrow serialization issues
+        # Convert the index (Year) to string to avoid Arrow serialization issues
         pivot_table.index = pivot_table.index.astype(str)
 
         # Calculate the total row
@@ -482,12 +488,12 @@ with tab3:
         if not event_data.empty:
             fig = px.bar(
                 event_data,
-                x="Jahr",
+                x="Year",
                 y="Anzahl",
                 title=f"Count of {selected_event_type} for Team {selected_team} Over Time",
-                labels={"Jahr": "Year", "Anzahl": "Count"},
+                labels={"Year": "Year", "Anzahl": "Count"},
             )
-            fig.update_xaxes(tickvals=event_data["Jahr"].astype(int))
+            fig.update_xaxes(tickvals=event_data["Year"].astype(int))
             st.plotly_chart(fig)
         else:
             st.write(f"No data available for {selected_event_type} for this team.")
@@ -496,7 +502,7 @@ with tab3:
         st.subheader(f"Player Statistics")
         
         # Dropdown for selecting the year (moved here)
-        years = sorted(df["Jahr"].unique())
+        years = sorted(df["Year"].unique())
         default_year = 2025 if 2025 in years else years[-1]  # Fallback to the latest year if 2025 isn't available
         selected_year = st.selectbox(
             "Select Year",
@@ -506,11 +512,11 @@ with tab3:
         )
 
         # Filter data for the selected team and year
-        team_year_data = df[(df["Team"] == selected_team) & (df["Jahr"] == selected_year)]
+        team_year_data = df[(df["Team"] == selected_team) & (df["Year"] == selected_year)]
         
         if not team_year_data.empty:
             # Get unique players for this team and year, ensuring we have the correct player information
-            players = team_year_data[["Spielernummer", "Name"]].drop_duplicates()
+            players = team_year_data[["Player Number", "Name"]].drop_duplicates()
             
             # Print debug information
             print(f"\nDebug: Players for {selected_team} in {selected_year}:")
@@ -519,11 +525,11 @@ with tab3:
             # Create player stats DataFrame
             player_stats = []
             for _, player in players.iterrows():
-                player_data = team_year_data[team_year_data["Spielernummer"] == player["Spielernummer"]]
+                player_data = team_year_data[team_year_data["Player Number"] == player["Player Number"]]
                 
                 # Create stats dictionary with player info
                 stats = {
-                    "#": player["Spielernummer"],
+                    "#": player["Player Number"],
                     "Player": player["Name"] if pd.notna(player["Name"]) else "None"
                 }
                 
@@ -584,7 +590,7 @@ with tab4:
     # Dropdowns for filtering raw data
     teams = sorted(df["Team"].unique())
     selected_team = st.selectbox("Select Team", ["All"] + teams, key="raw_data_team")
-    years = sorted(df["Jahr"].unique())
+    years = sorted(df["Year"].unique())
     selected_year = st.selectbox("Select Year", ["All"] + years, key="raw_data_year")
 
     # Filter the raw data
@@ -592,15 +598,15 @@ with tab4:
     if selected_team != "All":
         raw_data = raw_data[raw_data["Team"] == selected_team]
     if selected_year != "All":
-        raw_data = raw_data[raw_data["Jahr"] == selected_year]
+        raw_data = raw_data[raw_data["Year"] == selected_year]
 
     # Display the raw data with renamed columns
     raw_data_display = raw_data.rename(
         columns={
-            "Spielernummer": "#",
+            "Player Number": "#",
             "Name": "Player",
-            "Anzahl": "Count",
-            "Jahr": "Year",
+            "Count": "Count",
+            "Year": "Year",
             "Event": "Event Type",
             "Team": "Team",
             "League": "League"
