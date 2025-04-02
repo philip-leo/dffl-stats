@@ -509,29 +509,48 @@ with tab3:
         team_year_data = df[(df["Team"] == selected_team) & (df["Jahr"] == selected_year)]
         
         if not team_year_data.empty:
-            # Get unique players for this team and year
+            # Get unique players for this team and year, ensuring we have the correct player information
             players = team_year_data[["Spielernummer", "Name"]].drop_duplicates()
-
+            
+            # Print debug information
+            print(f"\nDebug: Players for {selected_team} in {selected_year}:")
+            print(players)
+            
             # Create player stats DataFrame
             player_stats = []
             for _, player in players.iterrows():
                 player_data = team_year_data[team_year_data["Spielernummer"] == player["Spielernummer"]]
-                stats = {"#": player["Spielernummer"], "Player": player["Name"]}
                 
-                # Add stats for each event type (excluding Overtime and Safety (+1))
-                for event in sorted(df["Event"].unique()):
-                    if event not in ["Overtime", "Safety (+1)"]:
-                        event_count = player_data[player_data["Event"] == event]["Anzahl"].sum()
-                        stats[event] = event_count
+                # Create stats dictionary with player info
+                stats = {
+                    "#": player["Spielernummer"],
+                    "Player": player["Name"] if pd.notna(player["Name"]) else "None"
+                }
+                
+                # Add stats for each event type
+                event_types = sorted([
+                    event for event in df["Event"].unique()
+                    if event not in ["Overtime", "Safety (+1)"]
+                ])
+                
+                for event in event_types:
+                    event_count = player_data[player_data["Event"] == event]["Anzahl"].sum()
+                    stats[event] = event_count
                 
                 player_stats.append(stats)
 
-            # Convert to DataFrame
+            # Convert to DataFrame and sort
             player_stats_df = pd.DataFrame(player_stats)
-
-            # Sort by Touchdown in descending order if it exists
+            
+            # Sort by Touchdown in descending order if it exists, otherwise by the first event type
             if "Touchdown" in player_stats_df.columns:
                 player_stats_df = player_stats_df.sort_values("Touchdown", ascending=False)
+            elif len(event_types) > 0:
+                player_stats_df = player_stats_df.sort_values(event_types[0], ascending=False)
+
+            # Print debug information
+            print("\nDebug: Player stats DataFrame:")
+            print(player_stats_df)
 
             # Display the player stats table
             st.dataframe(
