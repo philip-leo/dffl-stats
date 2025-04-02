@@ -47,7 +47,12 @@ if os.path.exists(csv_path):
     print("Loading stats CSV...")
     try:
         df = pd.read_csv(csv_path)
-        print("Stats CSV loaded successfully!")
+        # Print the first few rows of raw data for debugging
+        print("First few rows of stats CSV:")
+        print(df.head())
+        print("\nColumns in stats CSV:", df.columns.tolist())
+        print("\nDtypes of stats CSV:")
+        print(df.dtypes)
     except Exception as e:
         st.error(f"Error loading stats CSV: {str(e)}")
         st.stop()
@@ -61,7 +66,12 @@ if os.path.exists(player_mapping_path):
     print("Loading player mapping CSV...")
     try:
         player_mapping = pd.read_csv(player_mapping_path)
-        print("Player mapping CSV loaded successfully!")
+        # Print the first few rows of raw data for debugging
+        print("First few rows of player mapping CSV:")
+        print(player_mapping.head())
+        print("\nColumns in player mapping CSV:", player_mapping.columns.tolist())
+        print("\nDtypes of player mapping CSV:")
+        print(player_mapping.dtypes)
     except Exception as e:
         st.error(f"Error loading player mapping CSV: {str(e)}")
         st.stop()
@@ -97,15 +107,44 @@ else:
     st.error("Team info CSV file not found. Please ensure 'team_info.csv' is in the repository.")
     st.stop()
 
-# Convert Spielernummer to integer in both dataframes to ensure matching
-df["Spielernummer"] = pd.to_numeric(df["Spielernummer"], errors='coerce').astype('Int64')
-player_mapping["Spielernummer"] = pd.to_numeric(player_mapping["Spielernummer"], errors='coerce').astype('Int64')
+# Clean and validate Spielernummer in both dataframes
+print("\nCleaning and validating Spielernummer...")
+
+# Function to clean Spielernummer
+def clean_spielernummer(value):
+    if pd.isna(value):
+        return None
+    try:
+        # Convert to string first to handle any numeric formats
+        str_value = str(value).strip()
+        # Remove any non-numeric characters
+        cleaned = ''.join(filter(str.isdigit, str_value))
+        return int(cleaned) if cleaned else None
+    except Exception as e:
+        print(f"Error cleaning Spielernummer value '{value}': {str(e)}")
+        return None
+
+# Clean Spielernummer in both dataframes
+print("Cleaning Spielernummer in main dataframe...")
+df["Spielernummer"] = df["Spielernummer"].apply(clean_spielernummer)
+print("Sample of cleaned Spielernummer in main dataframe:")
+print(df[["Team", "Spielernummer"]].head())
+
+print("\nCleaning Spielernummer in player mapping...")
+player_mapping["Spielernummer"] = player_mapping["Spielernummer"].apply(clean_spielernummer)
+print("Sample of cleaned Spielernummer in player mapping:")
+print(player_mapping[["Team", "Spielernummer"]].head())
+
+# Convert to nullable integer type
+df["Spielernummer"] = df["Spielernummer"].astype("Int64")
+player_mapping["Spielernummer"] = player_mapping["Spielernummer"].astype("Int64")
 
 # Ensure Team column is string type in both dataframes
 df["Team"] = df["Team"].astype(str)
 player_mapping["Team"] = player_mapping["Team"].astype(str)
 
 # Print debug information
+print("\nFinal validation:")
 print("Debug: Columns in df:", df.columns.tolist())
 print("Debug: Columns in player_mapping:", player_mapping.columns.tolist())
 print("Debug: Sample of df Team and Spielernummer:")
