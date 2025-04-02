@@ -109,8 +109,10 @@ df = df.merge(
 )
 
 # Create a complete name column by concatenating First Name and Last Name
-df["Name"] = df["First Name"].fillna("") + " " + df["Last Name"].fillna("")
-df["Name"] = df["Name"].str.strip()  # Remove any extra spaces
+df["Name"] = df.apply(lambda x: f"{x['First Name']} {x['Last Name']}" if pd.notna(x['First Name']) and pd.notna(x['Last Name']) else "", axis=1).str.strip()
+
+# Drop the separate name columns as we don't need them anymore
+df = df.drop(columns=["First Name", "Last Name"])
 
 # Create a complete league mapping for all teams and years
 # Step 1: Get all unique team-year combinations from the main dataframe
