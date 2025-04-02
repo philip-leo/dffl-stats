@@ -6,6 +6,25 @@ import base64
 from PIL import Image
 import io
 
+# Set wide page layout and other configurations
+st.set_page_config(
+    page_title="Flag Football Stats Dashboard",
+    page_icon="🏈",
+    layout="wide",
+    initial_sidebar_state="auto"
+)
+
+# Add custom CSS for a more balanced width
+st.markdown("""
+    <style>
+        .main > div {
+            max-width: 70%;
+            margin: auto;
+        }
+        /* Remove the previous dataframe CSS that was causing issues */
+    </style>
+""", unsafe_allow_html=True)
+
 def get_base64_image(image_path, size=(30, 30)):
     try:
         if pd.isna(image_path) or not os.path.exists(image_path):
@@ -84,10 +103,14 @@ player_mapping["Spielernummer"] = player_mapping["Spielernummer"].astype(int)
 
 # Merge the player names into the main dataframe
 df = df.merge(
-    player_mapping[["Team", "Spielernummer", "Name"]],
+    player_mapping[["Team", "Spielernummer", "First Name", "Last Name"]],
     on=["Team", "Spielernummer"],
     how="left"
 )
+
+# Create a complete name column by concatenating First Name and Last Name
+df["Name"] = df["First Name"].fillna("") + " " + df["Last Name"].fillna("")
+df["Name"] = df["Name"].str.strip()  # Remove any extra spaces
 
 # Create a complete league mapping for all teams and years
 # Step 1: Get all unique team-year combinations from the main dataframe
@@ -130,11 +153,9 @@ if "selected_team" not in st.session_state:
 tab1, tab2, tab3, tab4 = st.tabs(["Top Players", "Player Stats", "Team Stats", "Raw Data"])
 
 with tab1:
-    st.header("Top Players")
-
     # Dropdown for selecting the year (default to 2025)
     years = sorted(df["Jahr"].unique())
-    default_year = 2025 if 2025 in years else years[-1]  # Fallback to the latest year if 2025 isn't available
+    default_year = 2025 if 2025 in years else years[-1]
     selected_year = st.selectbox(
         "Select Year",
         years,
@@ -185,7 +206,7 @@ with tab1:
     if not top_players.empty:
         # Create a clickable table with Player Number, Player (Name), Team Logo, Team Name, and Count
         top_players_display = top_players[["Spielernummer", "Name", "Team", "Anzahl"]].rename(
-            columns={"Spielernummer": "Player Number", "Name": "Player", "Team": "Team Name", "Anzahl": "Count"}
+            columns={"Spielernummer": "#", "Name": "Player", "Team": "Team Name", "Anzahl": "Count"}
         ).reset_index(drop=True)
 
         # Get team logos from team_info and convert to base64
@@ -199,29 +220,26 @@ with tab1:
         top_players_display.insert(2, "Team Logo", top_players_display["Team Name"].map(team_logos))
 
         # Display the table with custom column configurations
-        selected_row = st.dataframe(
+        st.dataframe(
             top_players_display,
-            on_select="rerun",
-            selection_mode="single-row",
             hide_index=True,
             use_container_width=True,
-            height=len(top_players_display) * 35 + 40,  # Adjust height based on number of rows
+            height=len(top_players_display) * 35 + 40,
             column_config={
-                "Player Number": st.column_config.NumberColumn(
-                    "#",  # This changes the display name to #
-                    width="small",
-                    help="Player number"
+                "#": st.column_config.NumberColumn(
+                    help="Player number",
+                    width="small"
                 ),
                 "Player": st.column_config.TextColumn(
                     width="medium"
                 ),
                 "Team Logo": st.column_config.ImageColumn(
-                    "Logo",  # Column header
-                    width="small",
-                    help="Team logo"
+                    "Logo",
+                    help="Team logo",
+                    width="small"
                 ),
                 "Team Name": st.column_config.TextColumn(
-                    "Team",  # Column header
+                    "Team",
                     width="medium"
                 ),
                 "Count": st.column_config.NumberColumn(
@@ -229,30 +247,18 @@ with tab1:
                 )
             }
         )
-
-        # If a row is selected, update the session state and switch to the Player Stats tab
-        if selected_row is not None and "selected_rows" in selected_row:
-            selected_player_index = selected_row["selected_rows"][0]
-            selected_player = top_players.iloc[selected_player_index]["Spielernummer"]
-            selected_team = top_players.iloc[selected_player_index]["Team"]
-            st.session_state.selected_player = selected_player
-            st.session_state.selected_team = selected_team
-            st.session_state.active_tab = "Player Stats"
-            st.rerun()
     else:
         st.write("No data available for the selected year, team, league, and event type.")
 
 with tab2:
-    st.header("Player Stats")
-
     # Dropdown for selecting the team
     teams = sorted(df["Team"].unique())
-    default_team = st.session_state.selected_team if st.session_state.selected_team in teams else teams[0]
+    default_team = teams[0]
     selected_team = st.selectbox("Select Team", teams, index=teams.index(default_team), key="player_stats_team")
 
     # Dropdown for selecting the player (filtered by team)
     players = sorted(df[df["Team"] == selected_team]["Spielernummer"].unique())
-    default_player = st.session_state.selected_player if st.session_state.selected_player in players else players[0]
+    default_player = players[0]
     selected_player = st.selectbox("Select Player", players, index=players.index(default_player), key="player_stats_player")
 
     # Get the player's name (if available)
@@ -261,7 +267,7 @@ with tab2:
     # Filter data for the selected player and team
     player_data = df[(df["Spielernummer"] == selected_player) & (df["Team"] == selected_team)]
 
-    # Create a pivot table: rows are years, columns are event types, values are counts
+    # Create a pivot table for career statistics
     if not player_data.empty:
         pivot_table = player_data.pivot_table(
             values="Anzahl",
@@ -286,40 +292,38 @@ with tab2:
         pivot_table.columns.name = "Event Type"
 
         # Display the pivot table with the Total row styled
-        st.subheader(f"Event Counts for {player_name} (Player {selected_player}, Team: {selected_team})")
+        st.subheader(f"Career Stats for {player_name}")
         st.dataframe(
             pivot_table.style.apply(
                 lambda x: ["font-weight: bold; background-color: #f0f0f0"] * len(x) if x.name == "Total" else [""] * len(x),
                 axis=1
-            )
+            ),
+            use_container_width=True,
+            height=len(pivot_table) * 35 + 40
         )
 
-        # Dropdown for selecting the event type for the visualization
-        event_types = sorted(df["Event"].unique())
-        selected_event_type = st.selectbox("Select Event Type for Visualization", event_types, key="player_stats_event_type")
+    # Dropdown for selecting the event type
+    event_types = sorted(df["Event"].unique())
+    selected_event_type = st.selectbox("Select Event Type", event_types, key="player_stats_event_type")
 
-        # Filter data for the selected event type
-        event_data = player_data[player_data["Event"] == selected_event_type]
+    # Filter data for the selected event type
+    event_data = player_data[player_data["Event"] == selected_event_type].groupby("Jahr")["Anzahl"].sum().reset_index()
 
-        # Plot count over time for the selected event type
-        if not event_data.empty:
-            fig = px.bar(
-                event_data,
-                x="Jahr",
-                y="Anzahl",
-                title=f"Count of {selected_event_type} for {player_name} (Player {selected_player}, Team: {selected_team}) Over Time",
-                labels={"Jahr": "Year", "Anzahl": "Count"},
-            )
-            fig.update_xaxes(tickvals=event_data["Jahr"].astype(int))
-            st.plotly_chart(fig)
-        else:
-            st.write(f"No data available for {selected_event_type} for this player.")
+    # Plot count over time for the selected event type
+    if not event_data.empty:
+        fig = px.bar(
+            event_data,
+            x="Jahr",
+            y="Anzahl",
+            title=f"Count of {selected_event_type} for {player_name} Over Time",
+            labels={"Jahr": "Year", "Anzahl": "Count"},
+        )
+        fig.update_xaxes(tickvals=event_data["Jahr"].astype(int))
+        st.plotly_chart(fig)
     else:
-        st.write("No data available for this player and team combination.")
+        st.write(f"No data available for {selected_event_type} for this player.")
 
 with tab3:
-    st.header("Team Stats")
-
     # Dropdown for selecting the team
     teams = sorted(df["Team"].unique())
     selected_team = st.selectbox("Select Team", teams, key="team_stats_team")
@@ -342,7 +346,6 @@ with tab3:
                 st.info("🖼️ Team logo coming soon")
         
         with col2:
-            # Display team information
             st.subheader(selected_team)
             
             # Display description with proper line breaks
@@ -354,7 +357,7 @@ with tab3:
             # Display Instagram link if available
             instagram_url = team_info_row["InstagramURL"].iloc[0]
             if pd.notna(instagram_url) and instagram_url:
-                st.markdown(f"[📸 Follow on Instagram]({instagram_url})")
+                st.markdown(f"[Instagram]({instagram_url})")
 
     # Add a separator
     st.markdown("---")
@@ -392,7 +395,9 @@ with tab3:
             pivot_table.style.apply(
                 lambda x: ["font-weight: bold; background-color: #f0f0f0"] * len(x) if x.name == "Total" else [""] * len(x),
                 axis=1
-            )
+            ),
+            use_container_width=True,
+            height=len(pivot_table) * 35 + 40
         )
 
         # Dropdown for selecting the event type for the visualization
@@ -440,7 +445,7 @@ with tab3:
             player_stats = []
             for _, player in players.iterrows():
                 player_data = team_year_data[team_year_data["Spielernummer"] == player["Spielernummer"]]
-                stats = {"Player Number": player["Spielernummer"], "Player Name": player["Name"]}
+                stats = {"#": player["Spielernummer"], "Player": player["Name"]}
                 
                 # Add stats for each event type (excluding Overtime and Safety (+1))
                 for event in sorted(df["Event"].unique()):
@@ -462,7 +467,23 @@ with tab3:
                 player_stats_df,
                 hide_index=True,
                 use_container_width=True,
-                height=len(player_stats_df) * 35 + 40  # Adjust height based on number of rows
+                height=len(player_stats_df) * 35 + 40,
+                column_config={
+                    "#": st.column_config.NumberColumn(
+                        help="Player number",
+                        width="small"
+                    ),
+                    "Player": st.column_config.TextColumn(
+                        width="medium"
+                    ),
+                    **{
+                        event: st.column_config.NumberColumn(
+                            width="small"
+                        )
+                        for event in player_stats_df.columns
+                        if event not in ["#", "Player"]
+                    }
+                }
             )
         else:
             st.write(f"No data available for team {selected_team} in {selected_year}")
@@ -470,8 +491,6 @@ with tab3:
         st.write("No data available for this team.")
 
 with tab4:
-    st.header("Raw Data")
-
     # Dropdowns for filtering raw data
     teams = sorted(df["Team"].unique())
     selected_team = st.selectbox("Select Team", ["All"] + teams, key="raw_data_team")
@@ -488,7 +507,7 @@ with tab4:
     # Display the raw data with renamed columns
     raw_data_display = raw_data.rename(
         columns={
-            "Spielernummer": "Player Number",
+            "Spielernummer": "#",
             "Name": "Player",
             "Anzahl": "Count",
             "Jahr": "Year",
@@ -497,4 +516,32 @@ with tab4:
             "League": "League"
         }
     )
-    st.write(raw_data_display)
+    st.dataframe(
+        raw_data_display,
+        use_container_width=True,
+        height=400,
+        column_config={
+            "#": st.column_config.NumberColumn(
+                help="Player number",
+                width="small"
+            ),
+            "Player": st.column_config.TextColumn(
+                width="medium"
+            ),
+            "Count": st.column_config.NumberColumn(
+                width="small"
+            ),
+            "Year": st.column_config.NumberColumn(
+                width="small"
+            ),
+            "Event Type": st.column_config.TextColumn(
+                width="medium"
+            ),
+            "Team": st.column_config.TextColumn(
+                width="medium"
+            ),
+            "League": st.column_config.TextColumn(
+                width="medium"
+            )
+        }
+    )
