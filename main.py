@@ -11,15 +11,10 @@ def clean_player_number(value):
     if pd.isna(value):
         return None
     try:
-        # Convert to string first to handle any numeric formats
-        str_value = str(value).strip()
-        # Remove any non-numeric characters
-        cleaned = ''.join(filter(str.isdigit, str_value))
-        # Convert to integer and ensure it's within reasonable range (1-99)
-        cleaned_int = int(cleaned) if cleaned else None
-        if cleaned_int and 0 < cleaned_int < 100:  # Only accept numbers between 1 and 99
-            return cleaned_int
-        return None
+        # Convert to float first to handle decimal format
+        float_value = float(str(value).strip())
+        # Convert to integer
+        return int(float_value)
     except Exception as e:
         print(f"Error cleaning player number value '{value}': {str(e)}")
         return None
@@ -60,39 +55,50 @@ def get_base64_image(image_path, size=(30, 30)):
 st.title("Flag Football Stats Dashboard")
 
 # Load the main stats CSV
-csv_path = "dffl_stats.csv"
-if os.path.exists(csv_path):
-    print("Loading stats CSV...")
-    try:
-        # Load the CSV with explicit dtypes using English column names
-        df = pd.read_csv(csv_path, dtype={
-            'Team': str,
-            'Player Number': str,
-            'Count': int,
-            'Event': str,
-            'Year': int
-        })
-        
-        print("First few rows of stats CSV:")
-        print(df.head())
-        print("\nColumns in stats CSV:", df.columns.tolist())
-        print("Dtypes of stats CSV:")
-        print(df.dtypes)
-        
-        # Clean Player Number in main dataframe
-        print("\nCleaning Player Number...")
-        df["Player Number"] = df["Player Number"].apply(clean_player_number)
-        df["Player Number"] = df["Player Number"].astype("Int64")
-        
-        # Print sample after cleaning
-        print("Sample of cleaned Player Numbers:")
-        print(df[["Team", "Player Number"]].head())
-        
-    except Exception as e:
-        st.error(f"Error loading stats CSV: {str(e)}")
-        st.stop()
-else:
-    st.error("Stats CSV file not found. Please ensure 'dffl_stats.csv' is in the repository.")
+historic_path = "dffl_stats_historic.csv"
+current_path = "dffl_stats_2025.csv"
+
+try:
+    print("Loading historic data...")
+    historic_df = pd.read_csv(historic_path, dtype={
+        'Team': str,
+        'Spielernummer': str,
+        'Anzahl': int,
+        'Event': str,
+        'Jahr': int
+    })
+    
+    # Rename columns to English for historic data
+    historic_df = historic_df.rename(columns={
+        'Spielernummer': 'Player Number',
+        'Anzahl': 'Count',
+        'Jahr': 'Year'
+        # 'Team' and 'Event' stay the same
+    })
+    
+    print("Loading 2025 data...")
+    current_df = pd.read_csv(current_path, dtype={
+        'Team': str,
+        'Player Number': str,
+        'Count': int,
+        'Event': str,
+        'Year': int
+    })
+    
+    # Combine the dataframes
+    df = pd.concat([historic_df, current_df], ignore_index=True)
+    
+    # Clean Player Number in combined dataframe
+    print("\nCleaning Player Number...")
+    df["Player Number"] = df["Player Number"].apply(clean_player_number)
+    df["Player Number"] = df["Player Number"].astype("Int64")
+    
+    # Print sample after cleaning
+    print("Sample of cleaned Player Numbers:")
+    print(df[["Team", "Player Number"]].head())
+    
+except Exception as e:
+    st.error(f"Error loading data: {str(e)}")
     st.stop()
 
 # Load the player mapping CSV file
@@ -655,7 +661,7 @@ with tab4:
     st.dataframe(
         raw_data_display,
         use_container_width=True,
-        height=400,
+        height=50 * 35 + 40,  # 50 rows * 35px per row + 40px for header
         column_config={
             "#": st.column_config.NumberColumn(
                 help="Player number",
