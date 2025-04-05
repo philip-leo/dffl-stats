@@ -138,24 +138,25 @@ def update_2025_data():
             
             # Click the CSV download button and get the data
             print("\nGetting CSV data...")
-            csv_data = page.evaluate("""() => {
-                return new Promise((resolve) => {
-                    const table = jQuery('#table_1').DataTable();
-                    const csvData = table.buttons.exportData({
-                        format: {
-                            header: function (data, columnIdx) {
-                                return table.column(columnIdx).header().textContent.trim();
+            csv_data = page.evaluate("""
+                () => {
+                    return new Promise((resolve) => {
+                        const table = jQuery('#table_1').DataTable();
+                        const csvData = table.buttons.exportData({
+                            format: {
+                                header: function(data, columnIdx) {
+                                    return table.column(columnIdx).header().textContent.trim();
+                                }
                             }
-                        }
+                        });
+                        
+                        const headers = csvData.header.join(',');
+                        const rows = csvData.body.map(row => row.join(','));
+                        const csv = headers + '\\n' + rows.join('\\n');
+                        resolve(csv);
                     });
-                    
-                    // Convert to CSV format
-                    const headers = csvData.header.join(',');
-                    const rows = csvData.body.map(row => row.join(','));
-                    const csv = headers + '\n' + rows.join('\n');
-                    resolve(csv);
-                });
-            }""")
+                }
+            """)
             
             # Process the downloaded data
             print("\nProcessing downloaded data...")
