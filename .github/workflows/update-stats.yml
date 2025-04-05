@@ -1,0 +1,37 @@
+name: Update DFFL Stats
+
+on:
+  schedule:
+    # Runs at 19:00 (7 PM) on Saturday and Sunday (UTC+2 for Germany)
+    - cron: '0 17 * * 6,0'  # UTC time (19:00 - 2 hours)
+  workflow_dispatch:  # Allows manual trigger of the workflow
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pandas playwright
+        playwright install chromium
+        
+    - name: Update 2025 stats
+      run: |
+        python update_2025_stats.py
+        
+    - name: Commit and push if changes
+      run: |
+        git config --local user.email "github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git add dffl_stats_2025.csv
+        git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update stats $(date '+%Y-%m-%d %H:%M:%S')" && git push) 

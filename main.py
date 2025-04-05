@@ -40,11 +40,17 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 def get_base64_image(image_path):
+    """Convert an image to base64 string."""
     try:
+        if pd.isna(image_path) or not os.path.exists(image_path):
+            return None
         with Image.open(image_path) as img:
+            # Resize image to a reasonable size for the table
+            img.thumbnail((30, 30))
             buffered = io.BytesIO()
             img.save(buffered, format="PNG")
-            return base64.b64encode(buffered.getvalue()).decode()
+            img_str = base64.b64encode(buffered.getvalue()).decode()
+            return f"data:image/png;base64,{img_str}"
     except Exception as e:
         print(f"Error loading image {image_path}: {str(e)}")
         return None
@@ -302,9 +308,8 @@ with tab1:
         ).reset_index(drop=True)
 
         # Get team logos from team_info and convert to base64
-        workspace_dir = os.path.dirname(os.path.abspath(__file__))
         team_logos = {
-            team: get_base64_image(os.path.join(workspace_dir, logo_path)) if pd.notna(logo_path) else None
+            team: get_base64_image(logo_path) if pd.notna(logo_path) else None
             for team, logo_path in zip(team_info['Team'], team_info['LogoPath'])
         }
         
