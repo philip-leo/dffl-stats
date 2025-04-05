@@ -5,6 +5,7 @@ import os
 import base64
 from PIL import Image
 import io
+from config import standardize_dataframe, EXPECTED_COLUMNS
 
 # Function to clean player number
 def clean_player_number(value):
@@ -38,18 +39,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-def get_base64_image(image_path, size=(30, 30)):
+def get_base64_image(image_path):
     try:
-        if pd.isna(image_path) or not os.path.exists(image_path):
-            return None
-        img = Image.open(image_path)
-        img = img.resize(size)  # Resize image to desired dimensions
-        buffered = io.BytesIO()
-        img.save(buffered, format="PNG")
-        img_str = base64.b64encode(buffered.getvalue()).decode()
-        return f"data:image/png;base64,{img_str}"
+        with Image.open(image_path) as img:
+            buffered = io.BytesIO()
+            img.save(buffered, format="PNG")
+            return base64.b64encode(buffered.getvalue()).decode()
     except Exception as e:
-        print(f"Error processing image {image_path}: {e}")
+        print(f"Error loading image {image_path}: {str(e)}")
         return None
 
 st.title("Flag Football Stats Dashboard")
@@ -60,30 +57,12 @@ current_path = "dffl_stats_2025.csv"
 
 try:
     print("Loading historic data...")
-    historic_df = pd.read_csv(historic_path, dtype={
-        'Team': str,
-        'Spielernummer': str,
-        'Anzahl': int,
-        'Event': str,
-        'Jahr': int
-    })
-    
-    # Rename columns to English for historic data
-    historic_df = historic_df.rename(columns={
-        'Spielernummer': 'Player Number',
-        'Anzahl': 'Count',
-        'Jahr': 'Year'
-        # 'Team' and 'Event' stay the same
-    })
+    historic_df = pd.read_csv(historic_path, dtype=EXPECTED_COLUMNS)
+    historic_df = standardize_dataframe(historic_df, is_german=True)
     
     print("Loading 2025 data...")
-    current_df = pd.read_csv(current_path, dtype={
-        'Team': str,
-        'Player Number': str,
-        'Count': int,
-        'Event': str,
-        'Year': int
-    })
+    current_df = pd.read_csv(current_path, dtype=EXPECTED_COLUMNS)
+    current_df = standardize_dataframe(current_df, is_german=False)  # Already in English
     
     # Combine the dataframes
     df = pd.concat([historic_df, current_df], ignore_index=True)

@@ -3,6 +3,7 @@ import time
 import pandas as pd
 import base64
 from io import StringIO
+from config import standardize_dataframe
 
 # Column name mapping from German to English
 COLUMN_MAPPING = {
@@ -35,20 +36,8 @@ def process_downloaded_data(csv_data):
     # Read the CSV data
     df = pd.read_csv(StringIO(csv_data))
     
-    # Rename columns from German to English
-    df = df.rename(columns=COLUMN_MAPPING)
-    
-    # Clean player numbers
-    df['Player Number'] = df['Player Number'].apply(clean_player_number)
-    df['Player Number'] = df['Player Number'].astype('Int64')
-    
-    # Ensure correct data types
-    df = df.astype({
-        'Team': str,
-        'Count': int,
-        'Event': str,
-        'Year': int
-    })
+    # Standardize the dataframe (convert German to English, clean data types)
+    df = standardize_dataframe(df, is_german=True)
     
     return df
 
@@ -163,7 +152,7 @@ def update_2025_data():
                     // Convert to CSV format
                     const headers = csvData.header.join(',');
                     const rows = csvData.body.map(row => row.join(','));
-                    const csv = headers + '\\n' + rows.join('\\n');
+                    const csv = headers + '\n' + rows.join('\n');
                     resolve(csv);
                 });
             }""")
