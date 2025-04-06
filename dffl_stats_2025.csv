@@ -1,22 +1,22 @@
 Team,Player Number,Count,Event,Year
-1. ASC Badener Greifs,2,1,Strafe,2025
 1. ASC Badener Greifs,2,1,Touchdown,2025
-1. ASC Badener Greifs,4,2,Interception,2025
-1. ASC Badener Greifs,4,2,1-Extra-Punkt,2025
+1. ASC Badener Greifs,2,1,Strafe,2025
 1. ASC Badener Greifs,4,2,First Down,2025
 1. ASC Badener Greifs,4,4,Touchdown,2025
+1. ASC Badener Greifs,4,2,Interception,2025
+1. ASC Badener Greifs,4,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs,11,1,First Down,2025
 1. ASC Badener Greifs,11,1,Touchdown,2025
 1. ASC Badener Greifs,21,1,Interception,2025
+1. ASC Badener Greifs,25,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs,25,2,First Down,2025
 1. ASC Badener Greifs,25,2,Touchdown,2025
-1. ASC Badener Greifs,25,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs,31,1,Touchdown,2025
 1. ASC Badener Greifs,31,3,Interception,2025
-1. ASC Badener Greifs,32,2,1-Extra-Punkt,2025
-1. ASC Badener Greifs,32,4,Touchdown,2025
 1. ASC Badener Greifs,32,1,2-Extra-Punkte,2025
 1. ASC Badener Greifs,32,8,First Down,2025
+1. ASC Badener Greifs,32,2,1-Extra-Punkt,2025
+1. ASC Badener Greifs,32,4,Touchdown,2025
 1. ASC Badener Greifs,37,10,First Down,2025
 1. ASC Badener Greifs,37,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs,37,7,Touchdown,2025
@@ -24,25 +24,25 @@ Team,Player Number,Count,Event,Year
 1. ASC Badener Greifs,55,1,Touchdown,2025
 1. ASC Badener Greifs II,2,1,Touchdown,2025
 1. ASC Badener Greifs II,23,1,Interception,2025
+1. ASC Badener Greifs II,32,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs II,32,1,2-Extra-Punkte,2025
 1. ASC Badener Greifs II,32,6,Touchdown,2025
 1. ASC Badener Greifs II,32,2,First Down,2025
-1. ASC Badener Greifs II,32,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs II,33,1,Interception,2025
+1. ASC Badener Greifs II,55,5,First Down,2025
 1. ASC Badener Greifs II,55,3,1-Extra-Punkt,2025
 1. ASC Badener Greifs II,55,7,Touchdown,2025
-1. ASC Badener Greifs II,55,5,First Down,2025
+1. ASC Badener Greifs II,67,1,Touchdown,2025
 1. ASC Badener Greifs II,67,1,Interception,2025
 1. ASC Badener Greifs II,67,1,Strafe,2025
-1. ASC Badener Greifs II,67,1,Touchdown,2025
 1. ASC Badener Greifs II,69,1,Touchdown,2025
 1. ASC Badener Greifs II,69,3,1-Extra-Punkt,2025
-1. ASC Badener Greifs II,78,2,Touchdown,2025
 1. ASC Badener Greifs II,78,1,Strafe,2025
 1. ASC Badener Greifs II,78,2,1-Extra-Punkt,2025
 1. ASC Badener Greifs II,78,6,First Down,2025
-1. ASC Badener Greifs II,79,2,First Down,2025
+1. ASC Badener Greifs II,78,2,Touchdown,2025
 1. ASC Badener Greifs II,79,1,Touchdown,2025
+1. ASC Badener Greifs II,79,2,First Down,2025
 Aachen Emperors,0,1,Touchdown,2025
 Aachen Emperors,10,2,Touchdown,2025
 Aachen Emperors,10,10,First Down,2025
@@ -52,74 +52,74 @@ Aachen Emperors,11,1,2-Extra-Punkte,2025
 Aachen Emperors,11,1,Strafe,2025
 Aachen Emperors,15,4,Touchdown,2025
 Aachen Emperors,15,4,First Down,2025
-Aachen Emperors,17,7,Touchdown,2025
 Aachen Emperors,17,4,First Down,2025
 Aachen Emperors,17,1,1-Extra-Punkt,2025
-Aachen Emperors,21,3,Interception,2025
+Aachen Emperors,17,7,Touchdown,2025
 Aachen Emperors,21,1,Touchdown,2025
 Aachen Emperors,21,1,First Down,2025
-Aachen Emperors,22,1,1-Extra-Punkt,2025
+Aachen Emperors,21,3,Interception,2025
 Aachen Emperors,22,1,Touchdown,2025
+Aachen Emperors,22,1,1-Extra-Punkt,2025
 Aachen Emperors,26,2,Interception,2025
 Aachen Emperors,27,3,Touchdown,2025
 Aachen Emperors,27,1,First Down,2025
 Aachen Emperors,27,2,1-Extra-Punkt,2025
-Aachen Emperors,31,1,Touchdown,2025
 Aachen Emperors,31,1,Strafe,2025
 Aachen Emperors,31,3,Interception,2025
+Aachen Emperors,31,1,Touchdown,2025
 Aachen Emperors,32,1,Interception,2025
-Aachen Emperors,36,4,First Down,2025
 Aachen Emperors,36,7,Touchdown,2025
-Aachen Emperors,41,1,Safety (+2),2025
-Aachen Emperors,41,3,Interception,2025
+Aachen Emperors,36,4,First Down,2025
 Aachen Emperors,41,1,First Down,2025
 Aachen Emperors,41,1,Strafe,2025
 Aachen Emperors,41,2,Touchdown,2025
+Aachen Emperors,41,1,Safety (+2),2025
+Aachen Emperors,41,3,Interception,2025
 Aachen Emperors,42,1,Strafe,2025
 Aachen Emperors,52,1,Interception,2025
 Aachen Emperors,69,1,Touchdown,2025
 Aachen Emperors,69,1,2-Extra-Punkte,2025
+Aachen Emperors,88,1,1-Extra-Punkt,2025
 Aachen Emperors,88,2,First Down,2025
 Aachen Emperors,88,2,Touchdown,2025
-Aachen Emperors,88,1,1-Extra-Punkt,2025
-Augsburg Centurions,0,2,Touchdown,2025
-Augsburg Centurions,0,2,Interception,2025
 Augsburg Centurions,0,1,Safety (+2),2025
 Augsburg Centurions,0,1,1-Extra-Punkt,2025
+Augsburg Centurions,0,2,Touchdown,2025
+Augsburg Centurions,0,2,Interception,2025
+Augsburg Centurions,2,2,Interception,2025
 Augsburg Centurions,2,1,Safety (+2),2025
 Augsburg Centurions,2,1,Strafe,2025
 Augsburg Centurions,2,1,Touchdown,2025
-Augsburg Centurions,2,2,Interception,2025
 Augsburg Centurions,10,2,Touchdown,2025
 Augsburg Centurions,13,1,First Down,2025
 Augsburg Centurions,17,1,Touchdown,2025
 Augsburg Centurions,17,1,1-Extra-Punkt,2025
 Augsburg Centurions,17,3,First Down,2025
+Augsburg Centurions,24,1,Strafe,2025
+Augsburg Centurions,24,6,Interception,2025
 Augsburg Centurions,24,10,Touchdown,2025
 Augsburg Centurions,24,4,1-Extra-Punkt,2025
 Augsburg Centurions,24,2,First Down,2025
-Augsburg Centurions,24,1,Strafe,2025
-Augsburg Centurions,24,6,Interception,2025
 Augsburg Centurions,32,2,Interception,2025
 Augsburg Centurions,33,1,Touchdown,2025
 Augsburg Centurions,33,1,1-Extra-Punkt,2025
 Augsburg Centurions,33,2,First Down,2025
-Augsburg Centurions,73,1,First Down,2025
-Augsburg Centurions,73,4,Interception,2025
 Augsburg Centurions,73,2,Touchdown,2025
 Augsburg Centurions,73,1,Strafe,2025
+Augsburg Centurions,73,1,First Down,2025
+Augsburg Centurions,73,4,Interception,2025
+Augsburg Lions,1,3,Strafe,2025
 Augsburg Lions,1,1,Interception,2025
 Augsburg Lions,1,1,Safety (+2),2025
-Augsburg Lions,1,3,Strafe,2025
+Augsburg Lions,5,2,Touchdown,2025
+Augsburg Lions,5,1,2-Extra-Punkte,2025
 Augsburg Lions,5,1,Strafe,2025
 Augsburg Lions,5,5,First Down,2025
-Augsburg Lions,5,1,2-Extra-Punkte,2025
-Augsburg Lions,5,2,Touchdown,2025
-Augsburg Lions,15,1,1-Extra-Punkt,2025
 Augsburg Lions,15,9,Touchdown,2025
+Augsburg Lions,15,2,2-Extra-Punkte,2025
+Augsburg Lions,15,1,1-Extra-Punkt,2025
 Augsburg Lions,15,1,Strafe,2025
 Augsburg Lions,15,3,First Down,2025
-Augsburg Lions,15,2,2-Extra-Punkte,2025
 Augsburg Lions,17,3,Safety (+2),2025
 Augsburg Lions,17,1,Strafe,2025
 Augsburg Lions,19,1,First Down,2025
@@ -127,79 +127,83 @@ Augsburg Lions,19,1,Touchdown,2025
 Augsburg Lions,23,3,Interception,2025
 Augsburg Lions,23,1,Touchdown,2025
 Augsburg Lions,25,6,Touchdown,2025
-Augsburg Lions,25,3,2-Extra-Punkte,2025
 Augsburg Lions,25,3,First Down,2025
+Augsburg Lions,25,3,2-Extra-Punkte,2025
 Augsburg Lions,26,1,Strafe,2025
 Augsburg Lions,26,1,Touchdown,2025
 Augsburg Lions,26,1,Interception,2025
 Augsburg Lions,72,3,Interception,2025
 Augsburg Lions,72,1,Strafe,2025
-Augsburg Lions,80,1,1-Extra-Punkt,2025
-Augsburg Lions,80,4,2-Extra-Punkte,2025
 Augsburg Lions,80,7,Touchdown,2025
 Augsburg Lions,80,11,First Down,2025
-Augsburg Lions,81,1,Strafe,2025
-Augsburg Lions,81,3,2-Extra-Punkte,2025
-Augsburg Lions,81,6,Touchdown,2025
+Augsburg Lions,80,1,1-Extra-Punkt,2025
+Augsburg Lions,80,4,2-Extra-Punkte,2025
 Augsburg Lions,81,5,First Down,2025
+Augsburg Lions,81,3,2-Extra-Punkte,2025
+Augsburg Lions,81,1,Strafe,2025
+Augsburg Lions,81,6,Touchdown,2025
 Augsburg Lions II,1,2,Touchdown,2025
 Augsburg Lions II,8,2,Touchdown,2025
 Augsburg Lions II,8,3,First Down,2025
-Augsburg Lions II,21,1,Interception,2025
 Augsburg Lions II,21,1,Touchdown,2025
+Augsburg Lions II,21,1,Interception,2025
 Augsburg Lions II,33,2,Interception,2025
+Augsburg Lions II,55,2,First Down,2025
 Augsburg Lions II,55,2,Strafe,2025
 Augsburg Lions II,55,1,1-Extra-Punkt,2025
 Augsburg Lions II,55,3,Touchdown,2025
-Augsburg Lions II,55,2,First Down,2025
 Augsburg Lions II,59,1,Touchdown,2025
 Augsburg Lions II,86,8,First Down,2025
 Augsburg Lions II,86,4,Touchdown,2025
 Augsburg Lions II,97,1,Touchdown,2025
 Augsburg Lions II,97,1,1-Extra-Punkt,2025
-AugsburgLions,8,1,1-Extra-Punkt,2025
-AugsburgLions,8,4,Touchdown,2025
 AugsburgLions,8,1,Strafe,2025
-AugsburgLions,20,8,First Down,2025
-AugsburgLions,20,2,1-Extra-Punkt,2025
+AugsburgLions,8,4,Touchdown,2025
+AugsburgLions,8,1,1-Extra-Punkt,2025
+AugsburgLions,11,1,Interception,2025
+AugsburgLions,20,1,Strafe,2025
+AugsburgLions,20,10,First Down,2025
 AugsburgLions,20,3,Touchdown,2025
+AugsburgLions,20,4,1-Extra-Punkt,2025
 AugsburgLions,24,1,Interception,2025
 AugsburgLions,25,1,Strafe,2025
 AugsburgLions,40,2,1-Extra-Punkt,2025
-AugsburgLions,55,3,Interception,2025
-AugsburgLions,69,2,Touchdown,2025
+AugsburgLions,40,2,First Down,2025
+AugsburgLions,40,2,Touchdown,2025
+AugsburgLions,55,4,Interception,2025
 AugsburgLions,69,1,Strafe,2025
-AugsburgLions,69,1,1-Extra-Punkt,2025
-AugsburgLions,69,1,First Down,2025
+AugsburgLions,69,2,First Down,2025
+AugsburgLions,69,6,Touchdown,2025
+AugsburgLions,69,2,1-Extra-Punkt,2025
 Berlin Thunder Lightnings,3,1,First Down,2025
 Berlin Thunder Lightnings,4,1,First Down,2025
 Berlin Thunder Lightnings,15,1,Interception,2025
+Berlin Thunder Lightnings,18,1,Strafe,2025
 Berlin Thunder Lightnings,18,1,Interception,2025
 Berlin Thunder Lightnings,18,2,Touchdown,2025
-Berlin Thunder Lightnings,18,1,Strafe,2025
 Berlin Thunder Lightnings,23,1,First Down,2025
 Berlin Thunder Lightnings,43,1,Interception,2025
 Berlin Thunder Lightnings,79,1,Interception,2025
-Berlin Thunder Lightnings,84,2,Strafe,2025
-Berlin Thunder Lightnings,84,3,1-Extra-Punkt,2025
 Berlin Thunder Lightnings,84,5,Touchdown,2025
 Berlin Thunder Lightnings,84,4,First Down,2025
-Berlin Thunder Lightnings,85,2,Touchdown,2025
+Berlin Thunder Lightnings,84,2,Strafe,2025
+Berlin Thunder Lightnings,84,3,1-Extra-Punkt,2025
 Berlin Thunder Lightnings,85,1,2-Extra-Punkte,2025
+Berlin Thunder Lightnings,85,2,Touchdown,2025
 Berlin Thunder Lightnings,87,1,First Down,2025
 Berlin Thunder Lightnings,87,2,Touchdown,2025
 Berlin Thunder Lightnings,88,2,First Down,2025
 Berlin Thunder Lightnings,88,2,1-Extra-Punkt,2025
 Berlin Thunder Lightnings,88,5,Touchdown,2025
+Black Forest Hedgehogs e.V.,9,4,Touchdown,2025
 Black Forest Hedgehogs e.V.,9,1,Strafe,2025
 Black Forest Hedgehogs e.V.,9,2,First Down,2025
-Black Forest Hedgehogs e.V.,9,4,Touchdown,2025
+Black Forest Hedgehogs e.V.,11,2,First Down,2025
 Black Forest Hedgehogs e.V.,11,2,Touchdown,2025
 Black Forest Hedgehogs e.V.,11,1,Interception,2025
 Black Forest Hedgehogs e.V.,11,1,Strafe,2025
-Black Forest Hedgehogs e.V.,11,2,First Down,2025
-Black Forest Hedgehogs e.V.,12,1,First Down,2025
 Black Forest Hedgehogs e.V.,12,1,2-Extra-Punkte,2025
+Black Forest Hedgehogs e.V.,12,1,First Down,2025
 Black Forest Hedgehogs e.V.,20,2,2-Extra-Punkte,2025
 Black Forest Hedgehogs e.V.,20,4,First Down,2025
 Black Forest Hedgehogs e.V.,20,2,Touchdown,2025
@@ -209,14 +213,14 @@ Black Forest Hedgehogs e.V.,23,1,Touchdown,2025
 Black Forest Hedgehogs e.V.,23,1,Interception,2025
 Black Forest Hedgehogs e.V.,29,1,Interception,2025
 Black Forest Hedgehogs e.V.,32,1,Touchdown,2025
-Black Forest Hedgehogs e.V.,85,4,Touchdown,2025
 Black Forest Hedgehogs e.V.,85,6,First Down,2025
+Black Forest Hedgehogs e.V.,85,4,Touchdown,2025
 Bochum Rebels,3,1,Touchdown,2025
 Bochum Rebels,8,2,Touchdown,2025
-Bochum Rebels,13,2,1-Extra-Punkt,2025
 Bochum Rebels,13,1,Touchdown,2025
-Bochum Rebels,15,2,Touchdown,2025
+Bochum Rebels,13,2,1-Extra-Punkt,2025
 Bochum Rebels,15,3,1-Extra-Punkt,2025
+Bochum Rebels,15,2,Touchdown,2025
 Bochum Rebels,16,3,1-Extra-Punkt,2025
 Bochum Rebels,16,2,Touchdown,2025
 Bochum Rebels,28,2,1-Extra-Punkt,2025
@@ -227,23 +231,23 @@ Bochum Rebels,81,1,Touchdown,2025
 Bochum Rebels,81,2,1-Extra-Punkt,2025
 Bochum Rebels,87,2,Interception,2025
 Bornheim Badgers,1,1,First Down,2025
-Bornheim Badgers,3,3,First Down,2025
 Bornheim Badgers,3,3,1-Extra-Punkt,2025
+Bornheim Badgers,3,3,First Down,2025
 Bornheim Badgers,16,1,1-Extra-Punkt,2025
 Bornheim Badgers,16,1,Touchdown,2025
 Bornheim Badgers,32,2,1-Extra-Punkt,2025
 Bornheim Badgers,32,1,Touchdown,2025
 Bornheim Badgers,84,5,Touchdown,2025
 Bornheim Badgers,84,2,Interception,2025
-Bornheim Badgers,84,1,1-Extra-Punkt,2025
 Bornheim Badgers,84,2,First Down,2025
+Bornheim Badgers,84,1,1-Extra-Punkt,2025
 Bornheim Badgers,85,1,Touchdown,2025
-Bornheim Badgers,87,3,Touchdown,2025
 Bornheim Badgers,87,2,First Down,2025
+Bornheim Badgers,87,3,Touchdown,2025
 Cologne Falcons Flag,0,1,Interception,2025
+Cologne Falcons Flag,4,1,1-Extra-Punkt,2025
 Cologne Falcons Flag,4,7,First Down,2025
 Cologne Falcons Flag,4,6,Touchdown,2025
-Cologne Falcons Flag,4,1,1-Extra-Punkt,2025
 Cologne Falcons Flag,5,2,Strafe,2025
 Cologne Falcons Flag,11,1,Strafe,2025
 Cologne Falcons Flag,12,1,Strafe,2025
@@ -259,10 +263,10 @@ Cologne Falcons Flag,25,1,1-Extra-Punkt,2025
 Cologne Falcons Flag,28,1,Touchdown,2025
 Cologne Falcons Flag,43,1,Strafe,2025
 Cologne Falcons Flag,43,1,Interception,2025
+Cologne Falcons Flag,80,3,First Down,2025
 Cologne Falcons Flag,80,1,Strafe,2025
 Cologne Falcons Flag,80,5,Touchdown,2025
 Cologne Falcons Flag,80,5,1-Extra-Punkt,2025
-Cologne Falcons Flag,80,3,First Down,2025
 Cologne Falcons Flag,87,1,1-Extra-Punkt,2025
 Cologne Falcons Flag,87,2,First Down,2025
 Crailsheim Mad Dogs,3,1,Touchdown,2025
@@ -276,9 +280,9 @@ Crailsheim Mad Dogs,13,5,Touchdown,2025
 Crailsheim Mad Dogs,16,2,First Down,2025
 Crailsheim Mad Dogs,28,2,First Down,2025
 Crailsheim Mad Dogs,28,2,Touchdown,2025
+Crailsheim Mad Dogs,42,1,First Down,2025
 Crailsheim Mad Dogs,42,1,Touchdown,2025
 Crailsheim Mad Dogs,42,1,Strafe,2025
-Crailsheim Mad Dogs,42,1,First Down,2025
 Crailsheim Mad Dogs,51,1,1-Extra-Punkt,2025
 Crailsheim Mad Dogs,68,4,First Down,2025
 Crailsheim Mad Dogs,68,1,Touchdown,2025
@@ -286,9 +290,9 @@ Crailsheim Mad Dogs,68,2,1-Extra-Punkt,2025
 Crailsheim Mad Dogs,80,1,Strafe,2025
 Crailsheim Mad Dogs,99,2,First Down,2025
 Crailsheim Mad Dogs,99,2,Touchdown,2025
-Darmstadt Diamonds,3,10,First Down,2025
 Darmstadt Diamonds,3,6,1-Extra-Punkt,2025
 Darmstadt Diamonds,3,5,Touchdown,2025
+Darmstadt Diamonds,3,10,First Down,2025
 Darmstadt Diamonds,5,3,1-Extra-Punkt,2025
 Darmstadt Diamonds,5,5,Touchdown,2025
 Darmstadt Diamonds,5,1,Strafe,2025
@@ -310,17 +314,17 @@ Darmstadt Diamonds,24,2,Interception,2025
 Darmstadt Diamonds,32,1,Interception,2025
 Darmstadt Diamonds,47,1,Interception,2025
 Darmstadt Diamonds,77,1,Interception,2025
+Darmstadt Diamonds,87,1,First Down,2025
 Darmstadt Diamonds,87,4,Touchdown,2025
 Darmstadt Diamonds,87,1,1-Extra-Punkt,2025
-Darmstadt Diamonds,87,1,First Down,2025
 Darmstadt Diamonds,89,2,1-Extra-Punkt,2025
 Darmstadt Diamonds,89,9,First Down,2025
 Darmstadt Diamonds,89,1,2-Extra-Punkte,2025
 Darmstadt Diamonds,89,10,Touchdown,2025
 Darmstadt Diamonds,99,1,Strafe,2025
 Dresden Monarchs Flag5,4,1,Interception,2025
-Dresden Monarchs Flag5,4,1,Touchdown,2025
 Dresden Monarchs Flag5,4,1,Strafe,2025
+Dresden Monarchs Flag5,4,1,Touchdown,2025
 Dresden Monarchs Flag5,12,1,Touchdown,2025
 Dresden Monarchs Flag5,15,3,Touchdown,2025
 Dresden Monarchs Flag5,15,1,Strafe,2025
@@ -328,10 +332,10 @@ Dresden Monarchs Flag5,17,1,First Down,2025
 Dresden Monarchs Flag5,18,1,Strafe,2025
 Dresden Monarchs Flag5,18,1,Interception,2025
 Dresden Monarchs Flag5,18,2,First Down,2025
+Dresden Monarchs Flag5,19,2,1-Extra-Punkt,2025
 Dresden Monarchs Flag5,19,2,Touchdown,2025
 Dresden Monarchs Flag5,19,1,Interception,2025
 Dresden Monarchs Flag5,19,5,First Down,2025
-Dresden Monarchs Flag5,19,2,1-Extra-Punkt,2025
 Dresden Monarchs Flag5,20,1,Interception,2025
 Dresden Monarchs Flag5,20,1,Strafe,2025
 Dresden Monarchs Flag5,21,1,Interception,2025
@@ -340,150 +344,150 @@ Dresden Monarchs Flag5,23,3,1-Extra-Punkt,2025
 Dresden Monarchs Flag5,23,7,Touchdown,2025
 Dresden Monarchs Flag5,25,1,Strafe,2025
 Dresden Monarchs Flag5,25,1,Interception,2025
+Dresden Monarchs Flag5,26,6,Touchdown,2025
 Dresden Monarchs Flag5,26,4,First Down,2025
 Dresden Monarchs Flag5,26,1,1-Extra-Punkt,2025
-Dresden Monarchs Flag5,26,6,Touchdown,2025
 Dresden Monarchs Flag5,27,1,Safety (+2),2025
-Dresden Monarchs Flag5,28,1,1-Extra-Punkt,2025
 Dresden Monarchs Flag5,28,1,Touchdown,2025
+Dresden Monarchs Flag5,28,1,1-Extra-Punkt,2025
 Dresden Monarchs Flag5,44,3,1-Extra-Punkt,2025
+Dresden Monarchs Flag5,44,1,Strafe,2025
 Dresden Monarchs Flag5,44,1,Touchdown,2025
 Dresden Monarchs Flag5,44,1,First Down,2025
-Dresden Monarchs Flag5,44,1,Strafe,2025
 Dresden Monarchs Flag5,55,1,First Down,2025
-Dresden Monarchs Flag5,58,1,Strafe,2025
 Dresden Monarchs Flag5,58,1,Interception,2025
+Dresden Monarchs Flag5,58,1,Strafe,2025
 Duisburg Dragons,3,3,First Down,2025
 Duisburg Dragons,3,14,Touchdown,2025
 Duisburg Dragons,3,5,2-Extra-Punkte,2025
-Duisburg Dragons,4,3,Interception,2025
 Duisburg Dragons,4,1,Strafe,2025
-Duisburg Dragons,6,2,Interception,2025
+Duisburg Dragons,4,3,Interception,2025
 Duisburg Dragons,6,2,Strafe,2025
+Duisburg Dragons,6,2,Interception,2025
 Duisburg Dragons,10,2,Touchdown,2025
 Duisburg Dragons,10,5,Interception,2025
-Duisburg Dragons,21,4,Strafe,2025
-Duisburg Dragons,21,12,First Down,2025
 Duisburg Dragons,21,5,2-Extra-Punkte,2025
 Duisburg Dragons,21,6,Touchdown,2025
-Duisburg Dragons,22,7,Touchdown,2025
+Duisburg Dragons,21,4,Strafe,2025
+Duisburg Dragons,21,12,First Down,2025
 Duisburg Dragons,22,4,First Down,2025
 Duisburg Dragons,22,8,2-Extra-Punkte,2025
-Duisburg Dragons,26,1,Strafe,2025
+Duisburg Dragons,22,7,Touchdown,2025
 Duisburg Dragons,26,1,Interception,2025
-Duisburg Dragons,27,1,2-Extra-Punkte,2025
-Duisburg Dragons,27,3,Touchdown,2025
+Duisburg Dragons,26,1,Strafe,2025
 Duisburg Dragons,27,1,Strafe,2025
 Duisburg Dragons,27,2,First Down,2025
+Duisburg Dragons,27,1,2-Extra-Punkte,2025
+Duisburg Dragons,27,3,Touchdown,2025
 Duisburg Dragons,32,1,Strafe,2025
 Duisburg Dragons,42,1,Interception,2025
-Duisburg Dragons,44,2,First Down,2025
 Duisburg Dragons,44,1,2-Extra-Punkte,2025
 Duisburg Dragons,44,2,Touchdown,2025
+Duisburg Dragons,44,2,First Down,2025
 Duisburg Dragons,88,3,First Down,2025
 Duisburg Dragons,88,2,Touchdown,2025
-Duisburg Dragons,89,2,Touchdown,2025
 Duisburg Dragons,89,2,First Down,2025
 Duisburg Dragons,89,1,2-Extra-Punkte,2025
-Düsseldorf Firecats,0,1,Interception,2025
+Duisburg Dragons,89,2,Touchdown,2025
 Düsseldorf Firecats,0,1,Touchdown,2025
 Düsseldorf Firecats,0,1,Strafe,2025
+Düsseldorf Firecats,0,1,Interception,2025
 Düsseldorf Firecats,1,1,Strafe,2025
 Düsseldorf Firecats,2,2,Strafe,2025
-Düsseldorf Firecats,3,1,1-Extra-Punkt,2025
 Düsseldorf Firecats,3,2,First Down,2025
 Düsseldorf Firecats,3,5,Touchdown,2025
+Düsseldorf Firecats,3,1,1-Extra-Punkt,2025
 Düsseldorf Firecats,14,2,Strafe,2025
 Düsseldorf Firecats,15,1,Interception,2025
+Düsseldorf Firecats,18,2,1-Extra-Punkt,2025
 Düsseldorf Firecats,18,3,First Down,2025
 Düsseldorf Firecats,18,3,Touchdown,2025
-Düsseldorf Firecats,18,2,1-Extra-Punkt,2025
 Düsseldorf Firecats,19,2,Interception,2025
 Düsseldorf Firecats,20,2,Interception,2025
-Düsseldorf Firecats,21,3,First Down,2025
 Düsseldorf Firecats,21,3,Touchdown,2025
 Düsseldorf Firecats,21,2,1-Extra-Punkt,2025
+Düsseldorf Firecats,21,3,First Down,2025
 Düsseldorf Firecats,25,1,Interception,2025
-Düsseldorf Firecats,26,1,Strafe,2025
 Düsseldorf Firecats,26,1,Interception,2025
-Düsseldorf Firecats,88,2,1-Extra-Punkt,2025
-Düsseldorf Firecats,88,2,Strafe,2025
+Düsseldorf Firecats,26,1,Strafe,2025
 Düsseldorf Firecats,88,3,First Down,2025
 Düsseldorf Firecats,88,1,Touchdown,2025
-Düsseldorf Firecats,97,2,Touchdown,2025
+Düsseldorf Firecats,88,2,1-Extra-Punkt,2025
+Düsseldorf Firecats,88,2,Strafe,2025
 Düsseldorf Firecats,97,1,1-Extra-Punkt,2025
 Düsseldorf Firecats,97,5,First Down,2025
+Düsseldorf Firecats,97,2,Touchdown,2025
+Erlangen Sharks,3,1,Touchdown,2025
 Erlangen Sharks,3,2,Strafe,2025
 Erlangen Sharks,3,1,1-Extra-Punkt,2025
-Erlangen Sharks,3,1,Touchdown,2025
 Erlangen Sharks,5,1,Strafe,2025
 Erlangen Sharks,5,1,1-Extra-Punkt,2025
-Erlangen Sharks,11,3,Touchdown,2025
 Erlangen Sharks,11,1,Strafe,2025
 Erlangen Sharks,11,2,First Down,2025
 Erlangen Sharks,11,6,1-Extra-Punkt,2025
+Erlangen Sharks,11,3,Touchdown,2025
+Erlangen Sharks,16,2,Touchdown,2025
 Erlangen Sharks,16,2,Strafe,2025
 Erlangen Sharks,16,1,First Down,2025
-Erlangen Sharks,16,2,Touchdown,2025
 Erlangen Sharks,20,1,First Down,2025
 Erlangen Sharks,25,7,Interception,2025
-Erlangen Sharks,27,1,Interception,2025
-Erlangen Sharks,27,4,1-Extra-Punkt,2025
 Erlangen Sharks,27,1,2-Extra-Punkte,2025
 Erlangen Sharks,27,8,First Down,2025
 Erlangen Sharks,27,5,Touchdown,2025
+Erlangen Sharks,27,1,Interception,2025
+Erlangen Sharks,27,4,1-Extra-Punkt,2025
+Erlangen Sharks,28,5,First Down,2025
 Erlangen Sharks,28,9,Touchdown,2025
 Erlangen Sharks,28,2,Strafe,2025
 Erlangen Sharks,28,2,1-Extra-Punkt,2025
-Erlangen Sharks,28,5,First Down,2025
-Erlangen Sharks,32,1,First Down,2025
-Erlangen Sharks,32,1,Touchdown,2025
 Erlangen Sharks,32,1,1-Extra-Punkt,2025
 Erlangen Sharks,32,1,Safety (+2),2025
+Erlangen Sharks,32,1,First Down,2025
+Erlangen Sharks,32,1,Touchdown,2025
 Erlangen Sharks,44,2,Interception,2025
 Erlangen Sharks,51,1,Touchdown,2025
 Erlangen Sharks,51,1,1-Extra-Punkt,2025
-Erlangen Sharks,85,3,1-Extra-Punkt,2025
 Erlangen Sharks,85,14,First Down,2025
 Erlangen Sharks,85,2,Strafe,2025
 Erlangen Sharks,85,1,Interception,2025
 Erlangen Sharks,85,15,Touchdown,2025
+Erlangen Sharks,85,3,1-Extra-Punkt,2025
 Heidelberg Hunters,5,1,Interception,2025
-Heidelberg Hunters,11,1,1-Extra-Punkt,2025
-Heidelberg Hunters,11,1,Strafe,2025
 Heidelberg Hunters,11,1,First Down,2025
+Heidelberg Hunters,11,1,Strafe,2025
 Heidelberg Hunters,11,1,Interception,2025
+Heidelberg Hunters,11,1,1-Extra-Punkt,2025
 Heidelberg Hunters,15,1,Interception,2025
 Heidelberg Hunters,21,1,Touchdown,2025
 Heidelberg Hunters,21,4,First Down,2025
-Heidelberg Hunters,24,3,First Down,2025
 Heidelberg Hunters,24,5,Touchdown,2025
+Heidelberg Hunters,24,3,First Down,2025
 Heidelberg Hunters,24,1,1-Extra-Punkt,2025
 Heidelberg Hunters,25,1,Strafe,2025
 Heidelberg Hunters,32,1,Strafe,2025
 Heidelberg Hunters,32,1,1-Extra-Punkt,2025
 Heidelberg Hunters,33,1,Strafe,2025
-Heidelberg Hunters,33,2,First Down,2025
 Heidelberg Hunters,33,1,Touchdown,2025
+Heidelberg Hunters,33,2,First Down,2025
 Heidelberg Hunters,36,4,Interception,2025
 Heidelberg Hunters,36,2,Strafe,2025
 Heidelberg Hunters,39,1,Touchdown,2025
 Heidelberg Hunters,47,1,Safety (+2),2025
 Heidelberg Hunters,47,2,Touchdown,2025
 Heidelberg Hunters,47,4,Interception,2025
-Heidelberg Hunters,55,4,Touchdown,2025
-Heidelberg Hunters,55,5,Interception,2025
 Heidelberg Hunters,55,2,First Down,2025
 Heidelberg Hunters,55,2,1-Extra-Punkt,2025
+Heidelberg Hunters,55,4,Touchdown,2025
+Heidelberg Hunters,55,5,Interception,2025
+Heidelberg Hunters,87,4,First Down,2025
 Heidelberg Hunters,87,2,Touchdown,2025
 Heidelberg Hunters,87,1,Strafe,2025
-Heidelberg Hunters,87,4,First Down,2025
 Heidelberg Hunters,89,3,Touchdown,2025
-Heidelberg Hunters,89,3,First Down,2025
 Heidelberg Hunters,89,1,2-Extra-Punkte,2025
+Heidelberg Hunters,89,3,First Down,2025
 Heidelberg Hunters,99,1,Interception,2025
-Herne Black Barons,12,1,2-Extra-Punkte,2025
 Herne Black Barons,12,1,Touchdown,2025
+Herne Black Barons,12,1,2-Extra-Punkte,2025
 Herne Black Barons,24,1,Touchdown,2025
 Herne Black Barons,24,2,Interception,2025
 Ingolstadt Women,2,2,Strafe,2025
@@ -504,71 +508,77 @@ Ingolstadt Women,36,1,First Down,2025
 Ingolstadt Women,36,2,Touchdown,2025
 Ingolstadt Women,36,7,Interception,2025
 Ingolstadt Women,48,1,1-Extra-Punkt,2025
+Königsbrunn Ants Women,15,1,Strafe,2025
 Königsbrunn Ants Women,24,1,Strafe,2025
-Königsbrunn Ants Women,25,1,First Down,2025
 Königsbrunn Ants Women,25,2,Strafe,2025
+Königsbrunn Ants Women,25,1,First Down,2025
 Königsbrunn Ants Women,26,1,Interception,2025
-Königsbrunn Ants Women,63,1,First Down,2025
+Königsbrunn Ants Women,63,3,First Down,2025
+Kornwestheim Cougars,2,2,1-Extra-Punkt,2025
 Kornwestheim Cougars,2,5,Touchdown,2025
 Kornwestheim Cougars,2,1,First Down,2025
-Kornwestheim Cougars,2,2,1-Extra-Punkt,2025
-Kornwestheim Cougars,5,1,1-Extra-Punkt,2025
-Kornwestheim Cougars,5,11,Touchdown,2025
 Kornwestheim Cougars,5,2,2-Extra-Punkte,2025
 Kornwestheim Cougars,5,3,First Down,2025
+Kornwestheim Cougars,5,1,1-Extra-Punkt,2025
+Kornwestheim Cougars,5,11,Touchdown,2025
 Kornwestheim Cougars,6,1,Interception,2025
 Kornwestheim Cougars,6,1,Strafe,2025
-Kornwestheim Cougars,7,1,Interception,2025
 Kornwestheim Cougars,7,1,Strafe,2025
+Kornwestheim Cougars,7,1,Interception,2025
 Kornwestheim Cougars,8,1,Interception,2025
+Kornwestheim Cougars,10,1,2-Extra-Punkte,2025
 Kornwestheim Cougars,10,4,First Down,2025
 Kornwestheim Cougars,10,4,1-Extra-Punkt,2025
 Kornwestheim Cougars,10,4,Touchdown,2025
-Kornwestheim Cougars,10,1,2-Extra-Punkte,2025
-Kornwestheim Cougars,11,1,First Down,2025
 Kornwestheim Cougars,11,1,1-Extra-Punkt,2025
 Kornwestheim Cougars,11,1,Touchdown,2025
+Kornwestheim Cougars,11,1,First Down,2025
 Kornwestheim Cougars,14,5,1-Extra-Punkt,2025
 Kornwestheim Cougars,14,6,Touchdown,2025
 Kornwestheim Cougars,14,2,2-Extra-Punkte,2025
 Kornwestheim Cougars,14,5,First Down,2025
+Kornwestheim Cougars,15,4,First Down,2025
 Kornwestheim Cougars,15,1,1-Extra-Punkt,2025
 Kornwestheim Cougars,15,2,Touchdown,2025
-Kornwestheim Cougars,15,4,First Down,2025
 Kornwestheim Cougars,16,1,Strafe,2025
 Kornwestheim Cougars,17,2,Touchdown,2025
+Kornwestheim Cougars,19,1,Touchdown,2025
 Kornwestheim Cougars,19,2,Interception,2025
 Kornwestheim Cougars,19,1,Strafe,2025
-Kornwestheim Cougars,19,1,Touchdown,2025
 Kornwestheim Cougars,20,3,Interception,2025
 Kornwestheim Cougars,35,1,Strafe,2025
-Leonberg Alligators,3,1,2-Extra-Punkte,2025
 Leonberg Alligators,3,1,First Down,2025
 Leonberg Alligators,3,7,Touchdown,2025
-Leonberg Alligators,5,1,First Down,2025
-Leonberg Alligators,9,2,1-Extra-Punkt,2025
-Leonberg Alligators,9,1,Touchdown,2025
+Leonberg Alligators,3,1,1-Extra-Punkt,2025
+Leonberg Alligators,3,1,2-Extra-Punkte,2025
+Leonberg Alligators,5,2,First Down,2025
+Leonberg Alligators,9,3,Touchdown,2025
 Leonberg Alligators,9,2,First Down,2025
-Leonberg Alligators,13,3,Touchdown,2025
-Leonberg Alligators,13,3,First Down,2025
-Leonberg Alligators,13,2,1-Extra-Punkt,2025
+Leonberg Alligators,9,5,1-Extra-Punkt,2025
+Leonberg Alligators,13,3,1-Extra-Punkt,2025
+Leonberg Alligators,13,6,Touchdown,2025
 Leonberg Alligators,13,1,Strafe,2025
-Leonberg Alligators,16,1,Touchdown,2025
+Leonberg Alligators,13,4,First Down,2025
 Leonberg Alligators,16,1,1-Extra-Punkt,2025
+Leonberg Alligators,16,2,Touchdown,2025
+Leonberg Alligators,16,1,Strafe,2025
+Leonberg Alligators,24,1,Strafe,2025
 Leonberg Alligators,28,1,Strafe,2025
+Leonberg Alligators,32,1,Interception,2025
 Leonberg Alligators,32,1,Strafe,2025
 Leonberg Alligators,35,1,Interception,2025
+Leonberg Alligators,44,1,Touchdown,2025
 Lichtenberg Lions,1,1,Strafe,2025
 Lichtenberg Lions,1,3,First Down,2025
 Lichtenberg Lions,1,3,2-Extra-Punkte,2025
 Lichtenberg Lions,1,4,Touchdown,2025
-Lichtenberg Lions,3,3,2-Extra-Punkte,2025
 Lichtenberg Lions,3,4,Touchdown,2025
 Lichtenberg Lions,3,3,First Down,2025
+Lichtenberg Lions,3,3,2-Extra-Punkte,2025
 Lichtenberg Lions,18,1,Strafe,2025
 Lichtenberg Lions,18,1,Touchdown,2025
-Lichtenberg Lions,19,3,Touchdown,2025
 Lichtenberg Lions,19,4,First Down,2025
+Lichtenberg Lions,19,3,Touchdown,2025
 Lichtenberg Lions,22,1,Interception,2025
 Lichtenberg Lions,26,1,Interception,2025
 Lichtenberg Lions,26,1,Touchdown,2025
@@ -576,18 +586,18 @@ Lichtenberg Lions,37,1,Interception,2025
 Lichtenberg Lions,37,1,Strafe,2025
 Lichtenberg Lions,81,1,Interception,2025
 Lichtenberg Lions,84,1,First Down,2025
-Lichtenberg Lions,95,3,Touchdown,2025
 Lichtenberg Lions,95,1,First Down,2025
+Lichtenberg Lions,95,3,Touchdown,2025
 Lichtenberg Lions,95,1,Interception,2025
 Lübeck Flag Cougars,7,3,Interception,2025
-Lübeck Flag Cougars,8,4,Strafe,2025
 Lübeck Flag Cougars,8,2,Touchdown,2025
 Lübeck Flag Cougars,8,1,First Down,2025
 Lübeck Flag Cougars,8,1,1-Extra-Punkt,2025
+Lübeck Flag Cougars,8,4,Strafe,2025
 Lübeck Flag Cougars,9,2,First Down,2025
+Lübeck Flag Cougars,11,4,Touchdown,2025
 Lübeck Flag Cougars,11,3,First Down,2025
 Lübeck Flag Cougars,11,1,1-Extra-Punkt,2025
-Lübeck Flag Cougars,11,4,Touchdown,2025
 Lübeck Flag Cougars,12,3,Strafe,2025
 Lübeck Flag Cougars,12,3,First Down,2025
 Lübeck Flag Cougars,12,1,2-Extra-Punkte,2025
@@ -596,93 +606,93 @@ Lübeck Flag Cougars,22,2,First Down,2025
 Lübeck Flag Cougars,22,1,2-Extra-Punkte,2025
 Lübeck Flag Cougars,22,4,Touchdown,2025
 Lübeck Flag Cougars,26,1,Strafe,2025
-Lübeck Flag Cougars,55,1,Strafe,2025
-Lübeck Flag Cougars,55,3,2-Extra-Punkte,2025
 Lübeck Flag Cougars,55,2,Touchdown,2025
 Lübeck Flag Cougars,55,2,1-Extra-Punkt,2025
 Lübeck Flag Cougars,55,7,First Down,2025
+Lübeck Flag Cougars,55,1,Strafe,2025
+Lübeck Flag Cougars,55,3,2-Extra-Punkte,2025
 Lübeck Flag Cougars,76,1,Safety (+2),2025
 Lübeck Flag Cougars,86,1,First Down,2025
 Mainz Legionaries,2,2,Touchdown,2025
 Mainz Legionaries,2,1,1-Extra-Punkt,2025
-Mainz Legionaries,3,5,First Down,2025
 Mainz Legionaries,3,3,2-Extra-Punkte,2025
 Mainz Legionaries,3,5,Touchdown,2025
 Mainz Legionaries,3,1,1-Extra-Punkt,2025
+Mainz Legionaries,3,5,First Down,2025
 Mainz Legionaries,5,1,Interception,2025
-Mainz Legionaries,10,10,Touchdown,2025
 Mainz Legionaries,10,12,First Down,2025
 Mainz Legionaries,10,2,2-Extra-Punkte,2025
+Mainz Legionaries,10,10,Touchdown,2025
 Mainz Legionaries,13,2,Interception,2025
-Mainz Legionaries,14,1,1-Extra-Punkt,2025
-Mainz Legionaries,14,1,Strafe,2025
 Mainz Legionaries,14,10,Touchdown,2025
 Mainz Legionaries,14,5,First Down,2025
 Mainz Legionaries,14,7,2-Extra-Punkte,2025
+Mainz Legionaries,14,1,1-Extra-Punkt,2025
+Mainz Legionaries,14,1,Strafe,2025
 Mainz Legionaries,20,5,Interception,2025
 Mainz Legionaries,23,1,Interception,2025
 Mainz Legionaries,39,1,2-Extra-Punkte,2025
 Mainz Legionaries,84,2,2-Extra-Punkte,2025
 Mainz Legionaries,84,5,Touchdown,2025
 Mainz Legionaries,84,3,First Down,2025
-Mainz Legionaries,86,1,First Down,2025
 Mainz Legionaries,86,1,Touchdown,2025
+Mainz Legionaries,86,1,First Down,2025
 Mainz Legionaries,87,2,First Down,2025
-Mainz Legionaries,99,6,Touchdown,2025
 Mainz Legionaries,99,5,First Down,2025
 Mainz Legionaries,99,5,2-Extra-Punkte,2025
+Mainz Legionaries,99,6,Touchdown,2025
 Mülheim Shamrocks,0,2,Interception,2025
 Mülheim Shamrocks,1,2,Interception,2025
 Mülheim Shamrocks,2,1,1-Extra-Punkt,2025
-Mülheim Shamrocks,3,3,First Down,2025
-Mülheim Shamrocks,3,1,Strafe,2025
 Mülheim Shamrocks,3,3,Touchdown,2025
 Mülheim Shamrocks,3,1,1-Extra-Punkt,2025
 Mülheim Shamrocks,3,1,2-Extra-Punkte,2025
+Mülheim Shamrocks,3,3,First Down,2025
+Mülheim Shamrocks,3,1,Strafe,2025
 Mülheim Shamrocks,4,1,First Down,2025
 Mülheim Shamrocks,4,1,1-Extra-Punkt,2025
 Mülheim Shamrocks,8,1,Strafe,2025
 Mülheim Shamrocks,9,1,Touchdown,2025
 Mülheim Shamrocks,13,1,First Down,2025
 Mülheim Shamrocks,15,1,Interception,2025
-Mülheim Shamrocks,17,2,Touchdown,2025
 Mülheim Shamrocks,17,5,First Down,2025
+Mülheim Shamrocks,17,2,Touchdown,2025
 Mülheim Shamrocks,27,1,Strafe,2025
-Mülheim Shamrocks,33,1,Strafe,2025
-Mülheim Shamrocks,33,1,First Down,2025
 Mülheim Shamrocks,33,2,Touchdown,2025
 Mülheim Shamrocks,33,2,Interception,2025
+Mülheim Shamrocks,33,1,Strafe,2025
+Mülheim Shamrocks,33,1,First Down,2025
 Mülheim Shamrocks,40,1,1-Extra-Punkt,2025
 Mülheim Shamrocks,40,5,First Down,2025
 Mülheim Shamrocks,40,7,Touchdown,2025
 Mülheim Shamrocks,51,2,Strafe,2025
 Mülheim Shamrocks,51,3,First Down,2025
-Mülheim Shamrocks,63,2,Touchdown,2025
 Mülheim Shamrocks,63,2,1-Extra-Punkt,2025
-München Rangers,1,1,Strafe,2025
+Mülheim Shamrocks,63,2,Touchdown,2025
 München Rangers,1,1,Touchdown,2025
+München Rangers,1,1,Strafe,2025
 München Rangers,2,3,1-Extra-Punkt,2025
 München Rangers,2,1,Strafe,2025
 München Rangers,2,4,First Down,2025
 München Rangers,2,5,Touchdown,2025
 München Rangers,5,1,Interception,2025
-München Rangers,11,1,Touchdown,2025
 München Rangers,11,2,1-Extra-Punkt,2025
 München Rangers,11,2,First Down,2025
+München Rangers,11,1,Touchdown,2025
 München Rangers,12,1,Interception,2025
 München Rangers,19,1,Interception,2025
 München Rangers,19,1,Touchdown,2025
 München Rangers,19,1,Strafe,2025
-München Rangers,33,1,Strafe,2025
 München Rangers,33,2,First Down,2025
 München Rangers,33,3,Interception,2025
 München Rangers,33,7,Touchdown,2025
 München Rangers,33,2,1-Extra-Punkt,2025
-München Rangers,39,1,Touchdown,2025
+München Rangers,33,1,Strafe,2025
 München Rangers,39,1,Strafe,2025
 München Rangers,39,1,Interception,2025
-München Rangers,42,1,1-Extra-Punkt,2025
+München Rangers,39,1,Touchdown,2025
 München Rangers,42,3,First Down,2025
+München Rangers,42,1,1-Extra-Punkt,2025
 München Rangers,98,1,1-Extra-Punkt,2025
 Munich Spatzen,0,4,Touchdown,2025
 Munich Spatzen,0,2,First Down,2025
@@ -698,23 +708,23 @@ Munich Spatzen,9,3,Interception,2025
 Munich Spatzen,11,7,Touchdown,2025
 Munich Spatzen,11,5,2-Extra-Punkte,2025
 Munich Spatzen,11,3,First Down,2025
-Munich Spatzen,13,1,Interception,2025
 Munich Spatzen,13,1,Touchdown,2025
+Munich Spatzen,13,1,Interception,2025
 Munich Spatzen,14,2,Interception,2025
 Munich Spatzen,15,1,Interception,2025
 Munich Spatzen,15,1,Touchdown,2025
-Munich Spatzen,16,11,Touchdown,2025
 Munich Spatzen,16,1,1-Extra-Punkt,2025
 Munich Spatzen,16,2,2-Extra-Punkte,2025
 Munich Spatzen,16,3,First Down,2025
-Munich Spatzen,17,1,2-Extra-Punkte,2025
+Munich Spatzen,16,11,Touchdown,2025
 Munich Spatzen,17,5,First Down,2025
 Munich Spatzen,17,3,Touchdown,2025
 Munich Spatzen,17,2,Strafe,2025
+Munich Spatzen,17,1,2-Extra-Punkte,2025
 Munich Spatzen,21,4,Interception,2025
-Munich Spatzen,22,2,Strafe,2025
 Munich Spatzen,22,3,Interception,2025
 Munich Spatzen,22,1,Touchdown,2025
+Munich Spatzen,22,2,Strafe,2025
 Munich Spatzen,26,1,2-Extra-Punkte,2025
 Munich Spatzen,26,11,First Down,2025
 Munich Spatzen,26,9,Touchdown,2025
@@ -728,18 +738,18 @@ Munich Spatzen 3,7,1,First Down,2025
 Munich Spatzen 3,9,4,First Down,2025
 Munich Spatzen 3,9,3,1-Extra-Punkt,2025
 Munich Spatzen 3,9,4,Touchdown,2025
-Munich Spatzen 3,12,1,Touchdown,2025
 Munich Spatzen 3,12,3,Interception,2025
-Munich Spatzen 3,15,1,1-Extra-Punkt,2025
+Munich Spatzen 3,12,1,Touchdown,2025
 Munich Spatzen 3,15,2,Touchdown,2025
 Munich Spatzen 3,15,3,First Down,2025
+Munich Spatzen 3,15,1,1-Extra-Punkt,2025
 Munich Spatzen 3,27,4,Touchdown,2025
 Munich Spatzen 3,27,3,First Down,2025
 Munich Spatzen 3,29,1,Interception,2025
-Munich Spatzen 3,30,1,Interception,2025
 Munich Spatzen 3,30,2,First Down,2025
 Munich Spatzen 3,30,1,1-Extra-Punkt,2025
 Munich Spatzen 3,30,4,Touchdown,2025
+Munich Spatzen 3,30,1,Interception,2025
 Munich Spatzen 3,37,1,Interception,2025
 Munich Spatzen 3,59,3,Touchdown,2025
 Munich Spatzen 3,59,2,1-Extra-Punkt,2025
@@ -748,18 +758,18 @@ Munich Spatzen 3,75,3,Interception,2025
 Munich Spatzen 3,93,1,Interception,2025
 Munich Spatzen Women,1,1,First Down,2025
 Munich Spatzen Women,1,1,1-Extra-Punkt,2025
-Munich Spatzen Women,2,4,1-Extra-Punkt,2025
 Munich Spatzen Women,2,2,First Down,2025
 Munich Spatzen Women,2,5,Touchdown,2025
+Munich Spatzen Women,2,4,1-Extra-Punkt,2025
 Munich Spatzen Women,5,1,Interception,2025
 Munich Spatzen Women,14,1,Strafe,2025
 Munich Spatzen Women,14,2,First Down,2025
-Munich Spatzen Women,17,2,First Down,2025
 Munich Spatzen Women,17,1,1-Extra-Punkt,2025
 Munich Spatzen Women,17,3,Touchdown,2025
-Munich Spatzen Women,21,9,Touchdown,2025
+Munich Spatzen Women,17,2,First Down,2025
 Munich Spatzen Women,21,4,First Down,2025
 Munich Spatzen Women,21,1,2-Extra-Punkte,2025
+Munich Spatzen Women,21,9,Touchdown,2025
 Munich Spatzen Women,24,1,First Down,2025
 Munich Spatzen Women,24,2,1-Extra-Punkt,2025
 Munich Spatzen Women,27,2,Interception,2025
@@ -774,14 +784,14 @@ Neu-Ulm Spartans,6,1,First Down,2025
 Neu-Ulm Spartans,6,1,Safety (+2),2025
 Neu-Ulm Spartans,6,3,Touchdown,2025
 Neu-Ulm Spartans,6,1,Strafe,2025
-Neu-Ulm Spartans,8,2,Touchdown,2025
 Neu-Ulm Spartans,8,5,First Down,2025
-Neu-Ulm Spartans,11,1,2-Extra-Punkte,2025
+Neu-Ulm Spartans,8,2,Touchdown,2025
 Neu-Ulm Spartans,11,2,Strafe,2025
 Neu-Ulm Spartans,11,5,Touchdown,2025
 Neu-Ulm Spartans,11,4,1-Extra-Punkt,2025
 Neu-Ulm Spartans,11,3,Interception,2025
 Neu-Ulm Spartans,11,2,First Down,2025
+Neu-Ulm Spartans,11,1,2-Extra-Punkte,2025
 Neu-Ulm Spartans,13,1,Interception,2025
 Neu-Ulm Spartans,15,1,Touchdown,2025
 Neu-Ulm Spartans,21,2,First Down,2025
@@ -794,8 +804,8 @@ Nürnberg Hawks,11,5,First Down,2025
 Nürnberg Hawks,11,1,Strafe,2025
 Nürnberg Hawks,16,1,2-Extra-Punkte,2025
 Nürnberg Hawks,16,1,First Down,2025
-Nürnberg Hawks,31,1,Strafe,2025
 Nürnberg Hawks,31,2,First Down,2025
+Nürnberg Hawks,31,1,Strafe,2025
 Nürnberg Hawks,37,1,Strafe,2025
 Nürnberg Hawks,40,1,Strafe,2025
 Nürnberg Hawks,84,2,First Down,2025
@@ -818,8 +828,8 @@ Nürnberg Renegades,17,2,Strafe,2025
 Nürnberg Renegades,18,1,1-Extra-Punkt,2025
 Nürnberg Renegades,18,3,First Down,2025
 Nürnberg Renegades,21,1,1-Extra-Punkt,2025
-Nürnberg Renegades,22,1,Touchdown,2025
 Nürnberg Renegades,22,3,First Down,2025
+Nürnberg Renegades,22,1,Touchdown,2025
 Nürnberg Renegades,23,2,Strafe,2025
 Nürnberg Renegades,23,8,First Down,2025
 Nürnberg Renegades,23,3,Touchdown,2025
@@ -833,8 +843,8 @@ Oldenburg Orcas,5,3,1-Extra-Punkt,2025
 Oldenburg Orcas,5,6,First Down,2025
 Oldenburg Orcas,5,16,Touchdown,2025
 Oldenburg Orcas,5,2,Strafe,2025
-Oldenburg Orcas,8,1,First Down,2025
 Oldenburg Orcas,8,1,Touchdown,2025
+Oldenburg Orcas,8,1,First Down,2025
 Oldenburg Orcas,9,1,2-Extra-Punkte,2025
 Oldenburg Orcas,9,3,First Down,2025
 Oldenburg Orcas,9,3,Touchdown,2025
@@ -851,9 +861,9 @@ Ostalb Highlanders,4,1,1-Extra-Punkt,2025
 Ostalb Highlanders,4,2,Touchdown,2025
 Ostalb Highlanders,4,1,First Down,2025
 Ostalb Highlanders,8,4,Interception,2025
+Ostalb Highlanders,13,2,First Down,2025
 Ostalb Highlanders,13,1,1-Extra-Punkt,2025
 Ostalb Highlanders,13,2,Touchdown,2025
-Ostalb Highlanders,13,2,First Down,2025
 Ostalb Highlanders,26,1,First Down,2025
 Ostalb Highlanders,30,2,Touchdown,2025
 Ostalb Highlanders,30,6,First Down,2025
@@ -862,14 +872,16 @@ Ostalb Highlanders,31,1,Strafe,2025
 Ostalb Highlanders,80,1,Strafe,2025
 Ostalb Highlanders,80,3,First Down,2025
 Ostalb Highlanders,87,1,First Down,2025
+Paderborn Dolphins,1,1,Touchdown,2025
 Paderborn Dolphins,2,1,Strafe,2025
-Paderborn Dolphins,2,1,1-Extra-Punkt,2025
+Paderborn Dolphins,2,2,1-Extra-Punkt,2025
 Paderborn Dolphins,7,1,Strafe,2025
 Paderborn Dolphins,12,1,Strafe,2025
 Paderborn Dolphins,15,1,Interception,2025
 Paderborn Dolphins,24,3,Touchdown,2025
+Paderborn Dolphins,25,1,Touchdown,2025
 Paderborn Dolphins,36,1,Strafe,2025
-Paderborn Dolphins,42,1,1-Extra-Punkt,2025
+Paderborn Dolphins,42,2,1-Extra-Punkt,2025
 Paderborn Dolphins,91,1,Touchdown,2025
 Ramsenthal RedWings,1,1,Interception,2025
 Ramsenthal RedWings,4,1,Interception,2025
@@ -877,19 +889,19 @@ Ramsenthal RedWings,10,1,First Down,2025
 Ramsenthal RedWings,11,1,Strafe,2025
 Ramsenthal RedWings,11,1,Interception,2025
 Ramsenthal RedWings,13,1,Interception,2025
-Ramsenthal RedWings,14,4,Touchdown,2025
 Ramsenthal RedWings,14,2,First Down,2025
 Ramsenthal RedWings,14,2,Strafe,2025
-Ramsenthal RedWings,17,1,Strafe,2025
+Ramsenthal RedWings,14,4,Touchdown,2025
 Ramsenthal RedWings,17,3,First Down,2025
+Ramsenthal RedWings,17,1,Strafe,2025
 Ramsenthal RedWings,18,1,Interception,2025
 Ramsenthal RedWings,19,1,First Down,2025
 Ramsenthal RedWings,19,1,Strafe,2025
 Ramsenthal RedWings,21,1,Strafe,2025
-Ramsenthal RedWings,22,1,2-Extra-Punkte,2025
 Ramsenthal RedWings,22,2,Touchdown,2025
 Ramsenthal RedWings,22,2,First Down,2025
 Ramsenthal RedWings,22,1,Strafe,2025
+Ramsenthal RedWings,22,1,2-Extra-Punkte,2025
 Ramsenthal RedWings,23,1,Touchdown,2025
 Ramsenthal RedWings,23,4,First Down,2025
 Ramsenthal RedWings,23,1,1-Extra-Punkt,2025
@@ -900,22 +912,22 @@ Regensburg Phoenix,5,3,First Down,2025
 Regensburg Phoenix,7,1,Strafe,2025
 Regensburg Phoenix,11,2,Interception,2025
 Regensburg Phoenix,11,2,Strafe,2025
-Regensburg Phoenix,12,2,Strafe,2025
 Regensburg Phoenix,12,1,Interception,2025
+Regensburg Phoenix,12,2,Strafe,2025
 Regensburg Phoenix,13,1,1-Extra-Punkt,2025
-Regensburg Phoenix,23,1,First Down,2025
 Regensburg Phoenix,23,2,1-Extra-Punkt,2025
 Regensburg Phoenix,23,2,Touchdown,2025
+Regensburg Phoenix,23,1,First Down,2025
 Regensburg Phoenix,25,1,Touchdown,2025
-Regensburg Phoenix,26,1,Touchdown,2025
 Regensburg Phoenix,26,1,Strafe,2025
-Regensburg Phoenix,27,2,First Down,2025
+Regensburg Phoenix,26,1,Touchdown,2025
 Regensburg Phoenix,27,1,1-Extra-Punkt,2025
+Regensburg Phoenix,27,2,First Down,2025
 Regensburg Phoenix,30,1,Interception,2025
-Regensburg Phoenix,32,2,1-Extra-Punkt,2025
 Regensburg Phoenix,32,2,Interception,2025
 Regensburg Phoenix,32,4,Touchdown,2025
 Regensburg Phoenix,32,1,Strafe,2025
+Regensburg Phoenix,32,2,1-Extra-Punkt,2025
 Regensburg Phoenix,42,1,Strafe,2025
 Rosenheim Rebels,1,2,First Down,2025
 Rosenheim Rebels,4,1,2-Extra-Punkte,2025
@@ -925,71 +937,76 @@ Rosenheim Rebels,23,2,Interception,2025
 Rosenheim Rebels,44,2,Touchdown,2025
 Rosenheim Rebels,44,1,1-Extra-Punkt,2025
 Rosenheim Rebels,44,5,First Down,2025
+Rosenheim Rebels,87,5,Touchdown,2025
 Rosenheim Rebels,87,1,Strafe,2025
 Rosenheim Rebels,87,1,1-Extra-Punkt,2025
 Rosenheim Rebels,87,8,First Down,2025
-Rosenheim Rebels,87,5,Touchdown,2025
 Rosenheim Rebels,90,1,Interception,2025
 Rosenheim Rebels,99,1,Interception,2025
 Rosenheim Rebels,99,1,Strafe,2025
-Sassenberg Knights,0,1,Touchdown,2025
 Sassenberg Knights,0,2,Interception,2025
+Sassenberg Knights,0,1,Touchdown,2025
 Sassenberg Knights,1,2,Interception,2025
-Sassenberg Knights,2,4,Interception,2025
 Sassenberg Knights,2,1,Touchdown,2025
+Sassenberg Knights,2,4,Interception,2025
+Sassenberg Knights,11,4,Touchdown,2025
 Sassenberg Knights,11,5,1-Extra-Punkt,2025
 Sassenberg Knights,11,3,First Down,2025
-Sassenberg Knights,11,4,Touchdown,2025
-Sassenberg Knights,12,2,Touchdown,2025
 Sassenberg Knights,12,1,Strafe,2025
 Sassenberg Knights,12,2,1-Extra-Punkt,2025
+Sassenberg Knights,12,2,Touchdown,2025
 Sassenberg Knights,14,1,Strafe,2025
 Sassenberg Knights,21,1,1-Extra-Punkt,2025
-Sassenberg Knights,23,3,Touchdown,2025
 Sassenberg Knights,23,1,Strafe,2025
 Sassenberg Knights,23,1,1-Extra-Punkt,2025
+Sassenberg Knights,23,3,Touchdown,2025
 Sassenberg Knights,28,1,Touchdown,2025
-Schorndorf Power Puffins,2,3,2-Extra-Punkte,2025
 Schorndorf Power Puffins,2,2,First Down,2025
-Schorndorf Power Puffins,9,1,Touchdown,2025
+Schorndorf Power Puffins,2,3,2-Extra-Punkte,2025
 Schorndorf Power Puffins,9,1,Interception,2025
-Schorndorf Power Puffins,10,4,First Down,2025
+Schorndorf Power Puffins,9,1,Touchdown,2025
 Schorndorf Power Puffins,10,1,1-Extra-Punkt,2025
+Schorndorf Power Puffins,10,4,First Down,2025
 Schorndorf Power Puffins,15,1,Touchdown,2025
 Schorndorf Power Puffins,15,2,Interception,2025
-Schorndorf Power Puffins,18,2,1-Extra-Punkt,2025
-Schorndorf Power Puffins,18,1,2-Extra-Punkte,2025
 Schorndorf Power Puffins,18,1,Strafe,2025
 Schorndorf Power Puffins,18,8,Touchdown,2025
-Schorndorf Power Puffins,19,4,First Down,2025
+Schorndorf Power Puffins,18,2,1-Extra-Punkt,2025
+Schorndorf Power Puffins,18,1,2-Extra-Punkte,2025
 Schorndorf Power Puffins,19,2,2-Extra-Punkte,2025
 Schorndorf Power Puffins,19,6,Touchdown,2025
+Schorndorf Power Puffins,19,4,First Down,2025
 Schorndorf Power Puffins,27,1,Interception,2025
-Schorndorf Power Puffins,31,2,Interception,2025
 Schorndorf Power Puffins,31,1,Strafe,2025
-Schorndorf Power Puffins,32,2,Touchdown,2025
+Schorndorf Power Puffins,31,2,Interception,2025
 Schorndorf Power Puffins,32,1,1-Extra-Punkt,2025
 Schorndorf Power Puffins,32,1,First Down,2025
 Schorndorf Power Puffins,32,1,2-Extra-Punkte,2025
-Schorndorf Power Puffins,33,1,2-Extra-Punkte,2025
+Schorndorf Power Puffins,32,2,Touchdown,2025
 Schorndorf Power Puffins,33,2,Touchdown,2025
 Schorndorf Power Puffins,33,1,1-Extra-Punkt,2025
 Schorndorf Power Puffins,33,2,First Down,2025
-Schorndorf Power Puffins,88,4,First Down,2025
+Schorndorf Power Puffins,33,1,2-Extra-Punkte,2025
 Schorndorf Power Puffins,88,4,2-Extra-Punkte,2025
 Schorndorf Power Puffins,88,7,Touchdown,2025
+Schorndorf Power Puffins,88,4,First Down,2025
 Schwäbisch Hall Unicorns,0,1,First Down,2025
 Schwäbisch Hall Unicorns,0,2,Interception,2025
-Schwäbisch Hall Unicorns,2,1,Touchdown,2025
+Schwäbisch Hall Unicorns,2,2,First Down,2025
+Schwäbisch Hall Unicorns,2,3,Touchdown,2025
 Schwäbisch Hall Unicorns,3,1,Touchdown,2025
+Schwäbisch Hall Unicorns,5,1,Interception,2025
+Schwäbisch Hall Unicorns,11,2,Touchdown,2025
 Schwäbisch Hall Unicorns,11,1,Strafe,2025
+Schwäbisch Hall Unicorns,11,2,1-Extra-Punkt,2025
+Schwäbisch Hall Unicorns,11,1,First Down,2025
 Schwäbisch Hall Unicorns,28,1,First Down,2025
 Schwäbisch Hall Unicorns,33,1,Touchdown,2025
 Schwäbisch Hall Unicorns,48,1,Touchdown,2025
 Schwäbisch Hall Unicorns,69,1,Touchdown,2025
-Schwäbisch Hall Unicorns,69,2,First Down,2025
-Schwäbisch Hall Unicorns,82,1,First Down,2025
+Schwäbisch Hall Unicorns,69,4,First Down,2025
 Schwäbisch Hall Unicorns,82,1,Touchdown,2025
+Schwäbisch Hall Unicorns,82,1,First Down,2025
 Schwäbisch Hall Unicorns,98,1,1-Extra-Punkt,2025
 SG Kelkheim Lizzards,2,3,Touchdown,2025
 SG Kelkheim Lizzards,2,6,First Down,2025
@@ -999,14 +1016,14 @@ SG Kelkheim Lizzards,4,1,2-Extra-Punkte,2025
 SG Kelkheim Lizzards,4,4,Strafe,2025
 SG Kelkheim Lizzards,4,5,First Down,2025
 SG Kelkheim Lizzards,4,4,1-Extra-Punkt,2025
+SG Kelkheim Lizzards,5,8,First Down,2025
 SG Kelkheim Lizzards,5,3,Touchdown,2025
 SG Kelkheim Lizzards,5,3,Strafe,2025
-SG Kelkheim Lizzards,5,8,First Down,2025
 SG Kelkheim Lizzards,6,1,Strafe,2025
 SG Kelkheim Lizzards,6,1,Interception,2025
+SG Kelkheim Lizzards,7,1,Touchdown,2025
 SG Kelkheim Lizzards,7,2,Strafe,2025
 SG Kelkheim Lizzards,7,1,Safety (+2),2025
-SG Kelkheim Lizzards,7,1,Touchdown,2025
 SG Kelkheim Lizzards,7,1,Interception,2025
 SG Kelkheim Lizzards,8,1,Strafe,2025
 SG Kelkheim Lizzards,10,2,1-Extra-Punkt,2025
@@ -1027,31 +1044,36 @@ SG Kelkheim Lizzards,84,3,2-Extra-Punkte,2025
 SG Kelkheim Lizzards,84,1,Strafe,2025
 SG Kelkheim Lizzards,84,1,1-Extra-Punkt,2025
 SG Kelkheim Lizzards,84,8,Touchdown,2025
+SG Kelkheim Lizzards,85,7,Touchdown,2025
 SG Kelkheim Lizzards,85,3,First Down,2025
 SG Kelkheim Lizzards,85,1,Strafe,2025
-SG Kelkheim Lizzards,85,7,Touchdown,2025
 SG Kelkheim Lizzards,91,2,Safety (+2),2025
 SG Kelkheim Lizzards,91,2,Strafe,2025
-SG Pink Panthers,2,2,Touchdown,2025
-SG Pink Panthers,2,1,First Down,2025
+SG Pink Panthers,2,4,Touchdown,2025
+SG Pink Panthers,2,2,First Down,2025
+SG Pink Panthers,2,1,1-Extra-Punkt,2025
+SG Pink Panthers,13,1,First Down,2025
+SG Pink Panthers,17,1,First Down,2025
+SG Pink Panthers,19,6,First Down,2025
 SG Pink Panthers,19,1,Touchdown,2025
-SG Pink Panthers,19,4,First Down,2025
 SG Pink Panthers,19,1,1-Extra-Punkt,2025
 SG Pink Panthers,21,1,First Down,2025
 SG Pink Panthers,21,1,Touchdown,2025
+SG Pink Panthers,27,1,Safety (+2),2025
 SG Pink Panthers,27,1,Interception,2025
-SG Pink Panthers,32,2,Interception,2025
+SG Pink Panthers,32,3,Interception,2025
 SG Pink Panthers,33,1,First Down,2025
 SG Pink Panthers,40,1,Strafe,2025
 SG Pink Panthers,40,1,1-Extra-Punkt,2025
-Strelitz Dukes,1,1,Strafe,2025
+SG Pink Panthers,83,1,Touchdown,2025
 Strelitz Dukes,1,1,First Down,2025
+Strelitz Dukes,1,1,Strafe,2025
 Strelitz Dukes,2,1,First Down,2025
 Strelitz Dukes,2,2,Touchdown,2025
+Strelitz Dukes,4,2,Interception,2025
 Strelitz Dukes,4,3,1-Extra-Punkt,2025
 Strelitz Dukes,4,4,First Down,2025
 Strelitz Dukes,4,6,Touchdown,2025
-Strelitz Dukes,4,2,Interception,2025
 Strelitz Dukes,6,1,1-Extra-Punkt,2025
 Strelitz Dukes,6,2,First Down,2025
 Strelitz Dukes,6,1,Touchdown,2025
@@ -1067,8 +1089,8 @@ Stuttgart Scorpions,6,2,1-Extra-Punkt,2025
 Stuttgart Scorpions,6,1,Strafe,2025
 Stuttgart Scorpions,6,1,First Down,2025
 Stuttgart Scorpions,8,1,First Down,2025
-Stuttgart Scorpions,8,3,Touchdown,2025
 Stuttgart Scorpions,8,1,1-Extra-Punkt,2025
+Stuttgart Scorpions,8,3,Touchdown,2025
 Stuttgart Scorpions,9,2,Interception,2025
 Stuttgart Scorpions,12,1,Touchdown,2025
 Stuttgart Scorpions,12,1,First Down,2025
@@ -1089,18 +1111,18 @@ Stuttgart Scorpions,35,1,Strafe,2025
 Stuttgart Scorpions,43,1,Strafe,2025
 Stuttgart Scorpions,43,2,First Down,2025
 Stuttgart Scorpions,43,1,Touchdown,2025
+Stuttgart Scorpions,46,3,First Down,2025
 Stuttgart Scorpions,46,2,Touchdown,2025
 Stuttgart Scorpions,46,2,1-Extra-Punkt,2025
-Stuttgart Scorpions,46,3,First Down,2025
 Stuttgart Scorpions,63,1,Interception,2025
 Stuttgart Scorpions,81,1,2-Extra-Punkte,2025
 Stuttgart Scorpions,81,4,Touchdown,2025
 Stuttgart Scorpions,81,4,1-Extra-Punkt,2025
 Stuttgart Scorpions,81,2,Strafe,2025
+Stuttgart Scorpions,91,4,Interception,2025
 Stuttgart Scorpions,91,1,Strafe,2025
 Stuttgart Scorpions,91,3,First Down,2025
 Stuttgart Scorpions,91,2,Touchdown,2025
-Stuttgart Scorpions,91,4,Interception,2025
 Stuttgart Scorpions,95,1,Strafe,2025
 Stuttgart Scorpions,98,1,Touchdown,2025
 Stuttgart Scorpions,98,1,2-Extra-Punkte,2025
@@ -1123,74 +1145,78 @@ Stuttgart Scorpions II,37,1,1-Extra-Punkt,2025
 Stuttgart Scorpions II,46,1,Interception,2025
 Stuttgart Scorpions II,99,2,Touchdown,2025
 Stuttgart Scorpions II,99,1,First Down,2025
-Stuttgart Scorpions Women,3,2,Interception,2025
+Stuttgart Scorpions Women,3,3,Interception,2025
 Stuttgart Scorpions Women,4,1,Strafe,2025
 Stuttgart Scorpions Women,10,1,First Down,2025
 Stuttgart Scorpions Women,13,1,1-Extra-Punkt,2025
-Stuttgart Scorpions Women,14,4,Touchdown,2025
+Stuttgart Scorpions Women,13,1,2-Extra-Punkte,2025
 Stuttgart Scorpions Women,14,2,Interception,2025
+Stuttgart Scorpions Women,14,5,Touchdown,2025
 Stuttgart Scorpions Women,14,1,1-Extra-Punkt,2025
+Stuttgart Scorpions Women,16,1,First Down,2025
+Stuttgart Scorpions Women,17,2,Interception,2025
+Stuttgart Scorpions Women,17,1,Touchdown,2025
 Stuttgart Scorpions Women,17,1,Strafe,2025
-Stuttgart Scorpions Women,20,1,Touchdown,2025
 Stuttgart Scorpions Women,20,1,2-Extra-Punkte,2025
+Stuttgart Scorpions Women,20,2,Touchdown,2025
 Stuttgart Scorpions Women,26,1,Strafe,2025
-Stuttgart Scorpions Women,26,1,First Down,2025
-Stuttgart Scorpions Women,26,2,2-Extra-Punkte,2025
 Stuttgart Scorpions Women,26,2,Touchdown,2025
+Stuttgart Scorpions Women,26,2,2-Extra-Punkte,2025
+Stuttgart Scorpions Women,26,2,First Down,2025
 Stuttgart Scorpions Women,26,2,Interception,2025
 Stuttgart Scorpions Women,36,1,Interception,2025
 Stuttgart Scorpions Women,43,1,Touchdown,2025
-Stuttgart Scorpions Women,83,3,Touchdown,2025
+Stuttgart Scorpions Women,83,4,Touchdown,2025
 Stuttgart Scorpions Women,83,1,2-Extra-Punkte,2025
-Tauberfranken Wolfpack Flag,16,2,Touchdown,2025
 Tauberfranken Wolfpack Flag,16,8,First Down,2025
-Tauberfranken Wolfpack Flag,68,1,Interception,2025
+Tauberfranken Wolfpack Flag,16,2,Touchdown,2025
 Tauberfranken Wolfpack Flag,68,1,Touchdown,2025
-Tauberfranken Wolfpack Flag,88,1,Touchdown,2025
+Tauberfranken Wolfpack Flag,68,1,Interception,2025
 Tauberfranken Wolfpack Flag,88,4,First Down,2025
+Tauberfranken Wolfpack Flag,88,1,Touchdown,2025
 Trier Biber,0,3,First Down,2025
 Trier Biber,0,1,Strafe,2025
 Trier Biber,0,1,2-Extra-Punkte,2025
 Trier Biber,1,3,Touchdown,2025
 Trier Biber,1,6,First Down,2025
 Trier Biber,1,3,1-Extra-Punkt,2025
+Trier Biber,2,1,2-Extra-Punkte,2025
 Trier Biber,2,2,Touchdown,2025
 Trier Biber,2,4,First Down,2025
 Trier Biber,2,1,1-Extra-Punkt,2025
-Trier Biber,2,1,2-Extra-Punkte,2025
 Trier Biber,3,1,Interception,2025
 Trier Biber,3,1,Touchdown,2025
 Trier Biber,4,2,Strafe,2025
 Trier Biber,6,1,Strafe,2025
 Trier Biber,6,1,Interception,2025
+Trier Biber,6,7,Touchdown,2025
 Trier Biber,6,9,First Down,2025
 Trier Biber,6,2,1-Extra-Punkt,2025
-Trier Biber,6,7,Touchdown,2025
+Trier Biber,13,5,Touchdown,2025
 Trier Biber,13,5,First Down,2025
 Trier Biber,13,1,1-Extra-Punkt,2025
-Trier Biber,13,5,Touchdown,2025
 Trier Biber,17,3,Interception,2025
 Trier Biber,25,1,Interception,2025
 Trier Biber,25,1,Touchdown,2025
 Trier Biber,39,1,Interception,2025
 Trier Biber,43,1,Interception,2025
 Walldorf Wanderers,1,1,Interception,2025
+Walldorf Wanderers,2,1,2-Extra-Punkte,2025
 Walldorf Wanderers,2,8,Touchdown,2025
 Walldorf Wanderers,2,3,First Down,2025
-Walldorf Wanderers,2,1,2-Extra-Punkte,2025
+Walldorf Wanderers,6,2,Touchdown,2025
 Walldorf Wanderers,6,1,First Down,2025
 Walldorf Wanderers,6,1,2-Extra-Punkte,2025
-Walldorf Wanderers,6,2,Touchdown,2025
 Walldorf Wanderers,8,6,Touchdown,2025
 Walldorf Wanderers,8,5,First Down,2025
 Walldorf Wanderers,8,2,2-Extra-Punkte,2025
 Walldorf Wanderers,14,1,Touchdown,2025
 Walldorf Wanderers,14,1,First Down,2025
 Walldorf Wanderers,14,1,2-Extra-Punkte,2025
-Walldorf Wanderers,21,2,Touchdown,2025
-Walldorf Wanderers,21,1,Interception,2025
 Walldorf Wanderers,21,4,First Down,2025
 Walldorf Wanderers,21,1,2-Extra-Punkte,2025
+Walldorf Wanderers,21,2,Touchdown,2025
+Walldorf Wanderers,21,1,Interception,2025
 Walldorf Wanderers,23,3,Touchdown,2025
 Walldorf Wanderers,23,1,2-Extra-Punkte,2025
 Walldorf Wanderers,32,2,Interception,2025
@@ -1200,25 +1226,25 @@ Walldorf Wanderers,96,3,Interception,2025
 Wiesbaden Phantoms Allstars,5,1,Touchdown,2025
 Wiesbaden Phantoms Allstars,5,3,First Down,2025
 Wiesbaden Phantoms Allstars,6,1,Strafe,2025
+Wiesbaden Phantoms Allstars,10,8,First Down,2025
 Wiesbaden Phantoms Allstars,10,1,2-Extra-Punkte,2025
 Wiesbaden Phantoms Allstars,10,1,1-Extra-Punkt,2025
 Wiesbaden Phantoms Allstars,10,2,Touchdown,2025
 Wiesbaden Phantoms Allstars,10,4,Strafe,2025
 Wiesbaden Phantoms Allstars,10,1,Safety (+2),2025
-Wiesbaden Phantoms Allstars,10,8,First Down,2025
 Wiesbaden Phantoms Allstars,11,10,First Down,2025
 Wiesbaden Phantoms Allstars,11,3,2-Extra-Punkte,2025
 Wiesbaden Phantoms Allstars,11,2,1-Extra-Punkt,2025
 Wiesbaden Phantoms Allstars,11,6,Touchdown,2025
 Wiesbaden Phantoms Allstars,11,1,Strafe,2025
 Wiesbaden Phantoms Allstars,11,2,Interception,2025
-Wiesbaden Phantoms Allstars,19,3,First Down,2025
 Wiesbaden Phantoms Allstars,19,1,1-Extra-Punkt,2025
 Wiesbaden Phantoms Allstars,19,3,Touchdown,2025
 Wiesbaden Phantoms Allstars,19,2,Strafe,2025
-Wiesbaden Phantoms Allstars,22,1,Strafe,2025
+Wiesbaden Phantoms Allstars,19,3,First Down,2025
 Wiesbaden Phantoms Allstars,22,1,First Down,2025
 Wiesbaden Phantoms Allstars,22,1,Interception,2025
+Wiesbaden Phantoms Allstars,22,1,Strafe,2025
 Wiesbaden Phantoms Allstars,29,1,Touchdown,2025
 Wiesbaden Phantoms Allstars,29,4,Interception,2025
 Wiesbaden Phantoms Allstars,29,3,Strafe,2025
@@ -1228,9 +1254,9 @@ Wiesbaden Phantoms Allstars,68,2,Strafe,2025
 Wiesbaden Phantoms Allstars,81,2,First Down,2025
 Wiesbaden Phantoms Allstars,81,1,Touchdown,2025
 Wiesbaden Phantoms Allstars,98,1,Interception,2025
-Würzburg Wombats,8,1,Strafe,2025
 Würzburg Wombats,8,1,First Down,2025
 Würzburg Wombats,8,2,Touchdown,2025
+Würzburg Wombats,8,1,Strafe,2025
 Würzburg Wombats,10,2,Strafe,2025
 Würzburg Wombats,11,1,First Down,2025
 Würzburg Wombats,11,1,Strafe,2025
@@ -1241,17 +1267,17 @@ Würzburg Wombats,14,3,1-Extra-Punkt,2025
 Würzburg Wombats,14,8,Touchdown,2025
 Würzburg Wombats,14,1,Strafe,2025
 Würzburg Wombats,14,7,First Down,2025
-Würzburg Wombats,15,1,Interception,2025
 Würzburg Wombats,15,1,First Down,2025
+Würzburg Wombats,15,1,Interception,2025
 Würzburg Wombats,17,1,First Down,2025
 Würzburg Wombats,17,2,Touchdown,2025
+Würzburg Wombats,23,1,Touchdown,2025
 Würzburg Wombats,23,2,First Down,2025
 Würzburg Wombats,23,1,2-Extra-Punkte,2025
 Würzburg Wombats,23,3,Interception,2025
-Würzburg Wombats,23,1,Touchdown,2025
-Würzburg Wombats,28,4,Touchdown,2025
 Würzburg Wombats,28,6,First Down,2025
 Würzburg Wombats,28,1,Interception,2025
+Würzburg Wombats,28,4,Touchdown,2025
 Würzburg Wombats,31,2,1-Extra-Punkt,2025
 Würzburg Wombats,31,1,Touchdown,2025
 Würzburg Wombats,31,2,Strafe,2025
