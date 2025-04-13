@@ -64,14 +64,23 @@ current_path = "dffl_stats_2025.csv"
 try:
     print("Loading historic data...")
     historic_df = pd.read_csv(historic_path, dtype=EXPECTED_COLUMNS)
+    print(f"Historic data loaded successfully. Shape: {historic_df.shape}")
     historic_df = standardize_dataframe(historic_df, is_german=True)
+    print("Historic data standardized successfully")
     
     print("Loading 2025 data...")
     current_df = pd.read_csv(current_path, dtype=EXPECTED_COLUMNS)
+    print(f"2025 data loaded successfully. Shape: {current_df.shape}")
+    print("Sample of 2025 data:")
+    print(current_df.head())
     current_df = standardize_dataframe(current_df, is_german=False)  # Already in English
+    print("2025 data standardized successfully")
     
     # Combine the dataframes
     df = pd.concat([historic_df, current_df], ignore_index=True)
+    print(f"Combined data shape: {df.shape}")
+    print("Sample of combined data:")
+    print(df[df['Year'] == 2025].head())
     
     # Clean Player Number in combined dataframe
     print("\nCleaning Player Number...")
@@ -80,10 +89,12 @@ try:
     
     # Print sample after cleaning
     print("Sample of cleaned Player Numbers:")
-    print(df[["Team", "Player Number"]].head())
+    print(df[["Team", "Player Number", "Year"]].head())
     
 except Exception as e:
     st.error(f"Error loading data: {str(e)}")
+    print(f"Detailed error: {str(e)}")
+    print(f"Error type: {type(e)}")
     st.stop()
 
 # Load the player mapping CSV file
@@ -283,12 +294,24 @@ with tab1:
     )
 
     # Filter data based on selections
+    print(f"\nDebug: Filtering data for year {selected_year} and event {selected_event_type}")
+    print(f"Debug: Available years in df: {df['Year'].unique()}")
+    print(f"Debug: Available events in df: {df['Event'].unique()}")
+    print(f"Debug: Shape of df before filtering: {df.shape}")
+    
     filtered_df = df[(df["Year"] == selected_year) & (df["Event"] == selected_event_type)]
+    print(f"Debug: Shape after year and event filter: {filtered_df.shape}")
+    print(f"Debug: Sample of filtered data:")
+    print(filtered_df.head())
+    
     if selected_league != "All":
         filtered_df = filtered_df[filtered_df["League"] == selected_league]
+        print(f"Debug: Shape after league filter: {filtered_df.shape}")
+        print(f"Debug: Available leagues in filtered data: {filtered_df['League'].unique()}")
 
     # Group by Team and Player Number to ensure all players are included, then merge back the Name
     top_players = filtered_df.groupby(["Team", "Player Number"]).agg({"Count": "sum"}).reset_index()
+    print(f"Debug: Shape after grouping: {top_players.shape}")
     top_players = top_players.merge(
         filtered_df[["Team", "Player Number", "Name"]].drop_duplicates(),
         on=["Team", "Player Number"],
