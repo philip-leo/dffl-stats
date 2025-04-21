@@ -325,9 +325,21 @@ with tab1:
         (f" (League: {selected_league})" if selected_league != "All" else "")
     )
     if not top_players.empty:
-        # Create a clickable table with Player Number, Player (Name), Team Logo, Team Name, and Count
-        top_players_display = top_players[["Player Number", "Name", "Team", "Count"]].rename(
-            columns={"Player Number": "#", "Name": "Player", "Team": "Team Name"}
+        # Merge with player_mapping to get profile pictures
+        top_players = top_players.merge(
+            player_mapping[["Team", "Player Number", "ProfilePicture"]],
+            on=["Team", "Player Number"],
+            how="left"
+        )
+        
+        # Create a clickable table with Player Number, Profile Picture, Player (Name), Team Logo, Team Name, and Count
+        top_players_display = top_players[["Player Number", "ProfilePicture", "Name", "Team", "Count"]].rename(
+            columns={
+                "Player Number": "#",
+                "ProfilePicture": "Profile",
+                "Name": "Player",
+                "Team": "Team Name"
+            }
         ).reset_index(drop=True)
 
         # Get team logos from team_info and convert to base64
@@ -337,7 +349,7 @@ with tab1:
         }
         
         # Add team logo column with base64 encoded images
-        top_players_display.insert(2, "Team Logo", top_players_display["Team Name"].map(team_logos))
+        top_players_display.insert(3, "Logo", top_players_display["Team Name"].map(team_logos))
 
         # Display the table with custom column configurations
         st.dataframe(
@@ -348,15 +360,18 @@ with tab1:
             column_config={
                 "#": st.column_config.NumberColumn(
                     help="Player number",
-                    width="small"
+                    width=50  # Minimal width for player number
+                ),
+                "Profile": st.column_config.ImageColumn(
+                    help="Player photo",
+                    width=60  # Minimal width for profile picture
                 ),
                 "Player": st.column_config.TextColumn(
                     width="medium"
                 ),
-                "Team Logo": st.column_config.ImageColumn(
-                    "Logo",
+                "Logo": st.column_config.ImageColumn(
                     help="Team logo",
-                    width="small"
+                    width=60  # Minimal width for team logo
                 ),
                 "Team Name": st.column_config.TextColumn(
                     "Team",
@@ -386,16 +401,29 @@ with tab2:
         default_player = players[0]
         selected_player = st.selectbox("Select Player", players, index=players.index(default_player), key="player_stats_player")
 
-        # Get the player's name (if available)
-        player_data = df[
-            (df["Team"] == selected_team) & 
-            (df["Player Number"] == selected_player)
+        # Get player details from the mapping
+        player_info = player_mapping[
+            (player_mapping['Team'] == selected_team) & 
+            (player_mapping['Player Number'] == selected_player)
         ]
-        player_name = player_data["Name"].iloc[0] if not player_data["Name"].isna().all() else "Unknown"
-
+        
+        if not player_info.empty:
+            player_info = player_info.iloc[0]
+            player_name = f"{player_info['First Name']} {player_info['Last Name']}"
+            
+            # Display player image if available
+            if pd.notna(player_info.get('ProfilePicture')) and str(player_info['ProfilePicture']).strip():
+                try:
+                    st.image(player_info['ProfilePicture'], width=200)
+                except Exception as e:
+                    print(f"Error loading player image: {str(e)}")
+                    st.info("Unable to load player image")
+        else:
+            player_name = "Unknown Player"
+        
         # Create a pivot table for career statistics
-        if not player_data.empty:
-            pivot_table = player_data.pivot_table(
+        if not team_players.empty:
+            pivot_table = team_players.pivot_table(
                 values="Count",
                 index="Year",
                 columns="Event",
@@ -421,7 +449,7 @@ with tab2:
             st.subheader(f"Career Stats for {player_name}")
             st.dataframe(
                 pivot_table.style.apply(
-                    lambda x: ["font-weight: bold; background-color: #f0f0f0"] * len(x) if x.name == "Total" else [""] * len(x),
+                    lambda x: ['background-color: rgba(128, 128, 128, 0.2); font-weight: bold'] * len(x) if x.name == "Total" else [""] * len(x),
                     axis=1
                 ),
                 use_container_width=True,
@@ -432,20 +460,35 @@ with tab2:
         event_types = sorted(df["Event"].unique())
         selected_event_type = st.selectbox("Select Event Type", event_types, key="player_stats_event_type")
 
-        # Filter data for the selected event type
-        event_data = player_data[player_data["Event"] == selected_event_type].groupby("Year")["Count"].sum().reset_index()
-
+        # Filter data for the selected event type and sum by year
+        event_data = team_players[team_players["Event"] == selected_event_type].groupby("Year")["Count"].sum().reset_index()
+        
         # Plot count over time for the selected event type
         if not event_data.empty:
             fig = px.bar(
                 event_data,
                 x="Year",
                 y="Count",
-                title=f"Count of {selected_event_type} for {player_name} Over Time",
-                labels={"Year": "Year", "Count": "Count"},
+                title=f"{selected_event_type} per Year",
+                labels={"Count": "Number of Events", "Year": "Year"},
+                color_discrete_sequence=["#1f77b4"]
             )
             fig.update_xaxes(tickvals=event_data["Year"].astype(int))
-            st.plotly_chart(fig)
+            fig.update_layout(
+                dragmode=False,  # Disable pan
+                showlegend=False,
+                xaxis=dict(fixedrange=True),  # Disable zoom on x-axis
+                yaxis=dict(fixedrange=True)   # Disable zoom on y-axis
+            )
+            # Add data labels on top of bars with increased size and padding
+            fig.update_traces(
+                text=event_data["Count"],
+                textposition='outside',
+                textfont=dict(size=16),
+                texttemplate='%{text:d}',  # Format as integer
+                cliponaxis=False           # Ensure labels are visible even if they extend beyond the plot
+            )
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False}, key=f"player_chart_{selected_player}_{selected_event_type}")
         else:
             st.write(f"No data available for {selected_event_type} for this player.")
     else:
@@ -521,7 +564,7 @@ with tab3:
         st.subheader(f"Event Counts for Team {selected_team}")
         st.dataframe(
             pivot_table.style.apply(
-                lambda x: ["font-weight: bold; background-color: #f0f0f0"] * len(x) if x.name == "Total" else [""] * len(x),
+                lambda x: ['background-color: rgba(128, 128, 128, 0.2); font-weight: bold'] * len(x) if x.name == "Total" else [""] * len(x),
                 axis=1
             ),
             use_container_width=True,
@@ -532,20 +575,35 @@ with tab3:
         event_types = sorted(df["Event"].unique())
         selected_event_type = st.selectbox("Select Event Type for Visualization", event_types, key="team_stats_event_type")
 
-        # Filter data for the selected event type
-        event_data = team_data[team_data["Event"] == selected_event_type]
-
+        # Filter data for the selected event type and sum by year
+        event_data = team_data[team_data["Event"] == selected_event_type].groupby("Year")["Count"].sum().reset_index()
+        
         # Plot count over time for the selected event type
         if not event_data.empty:
             fig = px.bar(
                 event_data,
                 x="Year",
                 y="Count",
-                title=f"Count of {selected_event_type} for Team {selected_team} Over Time",
-                labels={"Year": "Year", "Count": "Count"},
+                title=f"{selected_event_type} per Year",
+                labels={"Count": "Number of Events", "Year": "Year"},
+                color_discrete_sequence=["#1f77b4"]
             )
             fig.update_xaxes(tickvals=event_data["Year"].astype(int))
-            st.plotly_chart(fig)
+            fig.update_layout(
+                dragmode=False,  # Disable pan
+                showlegend=False,
+                xaxis=dict(fixedrange=True),  # Disable zoom on x-axis
+                yaxis=dict(fixedrange=True)   # Disable zoom on y-axis
+            )
+            # Add data labels on top of bars with increased size and padding
+            fig.update_traces(
+                text=event_data["Count"],
+                textposition='outside',
+                textfont=dict(size=16),
+                texttemplate='%{text:d}',  # Format as integer
+                cliponaxis=False           # Ensure labels are visible even if they extend beyond the plot
+            )
+            st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False}, key=f"team_chart_{selected_team}_{selected_event_type}")
         else:
             st.write(f"No data available for {selected_event_type} for this team.")
 
@@ -582,9 +640,19 @@ with tab3:
                 for _, player in players.iterrows():
                     player_data = team_year_data[team_year_data["Player Number"] == player["Player Number"]]
                     
+                    # Get player's profile picture from player_mapping
+                    player_profile = player_mapping[
+                        (player_mapping["Team"] == selected_team) & 
+                        (player_mapping["Player Number"] == player["Player Number"])
+                    ]["ProfilePicture"].iloc[0] if not player_mapping[
+                        (player_mapping["Team"] == selected_team) & 
+                        (player_mapping["Player Number"] == player["Player Number"])
+                    ].empty else None
+                    
                     # Create stats dictionary with player info
                     stats = {
                         "#": player["Player Number"],
+                        "Profile": player_profile,
                         "Player": player["Name"] if pd.notna(player["Name"]) else "None"
                     }
                     
@@ -618,7 +686,11 @@ with tab3:
                     column_config={
                         "#": st.column_config.NumberColumn(
                             help="Player number",
-                            width="small"
+                            width=50
+                        ),
+                        "Profile": st.column_config.ImageColumn(
+                            help="Player photo",
+                            width=60
                         ),
                         "Player": st.column_config.TextColumn(
                             width="medium"
@@ -628,7 +700,7 @@ with tab3:
                                 width="small"
                             )
                             for event in player_stats_df.columns
-                            if event not in ["#", "Player"]
+                            if event not in ["#", "Profile", "Player"]
                         }
                     }
                 )
