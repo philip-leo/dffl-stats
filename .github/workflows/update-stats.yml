@@ -2,8 +2,9 @@ name: Update DFFL Stats
 
 on:
   schedule:
-    # Runs at 19:00 (7 PM) on Saturday and Sunday (UTC+2 for Germany)
-    - cron: '0 17 * * 6,0'  # UTC time (19:00 - 2 hours)
+    # Runs every hour from 11 AM to 7 PM German time (UTC+2) on Saturday and Sunday
+    - cron: '0 9-15 * * 6'  # Saturday: 9-15 UTC = 11-17 German time
+    - cron: '0 9-15 * * 0'  # Sunday: 9-15 UTC = 11-17 German time
   workflow_dispatch:  # Allows manual trigger of the workflow
 
 jobs:
