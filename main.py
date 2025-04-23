@@ -464,7 +464,10 @@ with tab2:
         selected_event_type = st.selectbox("Select Event Type", event_types, key="player_stats_event_type")
 
         # Filter data for the selected event type and sum by year
-        event_data = team_players[team_players["Event"] == selected_event_type].groupby("Year")["Count"].sum().reset_index()
+        event_data = team_players[
+            (team_players["Event"] == selected_event_type) & 
+            (team_players["Player Number"] == selected_player)
+        ].groupby("Year")["Count"].sum().reset_index()
         
         # Plot count over time for the selected event type
         if not event_data.empty:
@@ -472,7 +475,7 @@ with tab2:
                 event_data,
                 x="Year",
                 y="Count",
-                title=f"{selected_event_type} per Year",
+                title=f"{selected_event_type} per Year for {player_name}",
                 labels={"Count": "Number of Events", "Year": "Year"},
                 color_discrete_sequence=["#1f77b4"]
             )
