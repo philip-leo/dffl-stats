@@ -6,7 +6,15 @@ COLUMN_MAPPING = {
     'Spielernummer': 'Player Number',
     'Anzahl': 'Count',
     'Event': 'Event',  # Same in both languages
-    'Jahr': 'Year'
+    'Jahr': 'Year',
+    # New mappings for detailed stats
+    'Gegen': 'Opponent',
+    'Spieltag': 'Matchday',
+    'Datum': 'Date',
+    'stage': 'Stage',
+    'standing': 'Standing',
+    'scheduled': 'Scheduled Time',
+    'created_time': 'Created Time'
 }
 
 # Expected column names in English (after translation)
@@ -15,7 +23,15 @@ EXPECTED_COLUMNS = {
     'Player Number': str,  # Keep as string initially, will be converted to Int64 after cleaning
     'Count': int,
     'Event': str,
-    'Year': int
+    'Year': int,
+    # New columns for detailed stats
+    'Opponent': str,
+    'Matchday': str,
+    'Date': str,
+    'Stage': str,
+    'Standing': str,
+    'Scheduled Time': str,
+    'Created Time': str
 }
 
 def clean_player_number(value):

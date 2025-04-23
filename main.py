@@ -423,7 +423,10 @@ with tab2:
         
         # Create a pivot table for career statistics
         if not team_players.empty:
-            pivot_table = team_players.pivot_table(
+            # Filter for the current player first
+            player_stats = team_players[team_players["Player Number"] == selected_player]
+            
+            pivot_table = player_stats.pivot_table(
                 values="Count",
                 index="Year",
                 columns="Event",
@@ -491,6 +494,131 @@ with tab2:
             st.plotly_chart(fig, use_container_width=True, config={'displayModeBar': False}, key=f"player_chart_{selected_player}_{selected_event_type}")
         else:
             st.write(f"No data available for {selected_event_type} for this player.")
+
+        # New section: Per-game stats for selected year
+        st.subheader("Per-Game Stats")
+        
+        # Dropdown for selecting the year
+        years = sorted(df["Year"].unique())
+        default_year = 2025 if 2025 in years else years[-1]
+        selected_year = st.selectbox(
+            "Select Year for Per-Game Stats",
+            years,
+            index=years.index(default_year),
+            key="player_per_game_year"
+        )
+
+        # Load detailed stats for the selected year
+        detail_file = "dffl_stats_detail_2025.csv" if selected_year == 2025 else "dffl_stats_detail_historic.csv"
+        try:
+            # Load the detailed stats
+            detail_df = pd.read_csv(detail_file)
+            
+            # Add Count column (each row represents one event)
+            detail_df['Count'] = 1
+            
+            # Convert date to datetime and extract year
+            detail_df['Year'] = pd.to_datetime(detail_df['Datum'], format='%d.%m.%Y').dt.year
+            
+            # Standardize the dataframe
+            detail_df = standardize_dataframe(detail_df, is_german=True)
+            
+            # Filter for the selected player, team, and year
+            player_detail_df = detail_df[
+                (detail_df["Team"] == selected_team) & 
+                (detail_df["Player Number"] == selected_player) &
+                (detail_df["Year"] == selected_year)  # Add year filter here
+            ]
+            
+            # Merge with player mapping to get player name (if available)
+            player_detail_df = player_detail_df.merge(
+                player_mapping[["Team", "Player Number", "Name"]],
+                on=["Team", "Player Number"],
+                how="left"
+            )
+            
+            if not player_detail_df.empty:
+                # Group by game (using Date and Scheduled Time) and create a pivot table
+                game_stats = player_detail_df.pivot_table(
+                    values="Count",
+                    index=["Date", "Matchday", "Opponent", "Scheduled Time"],
+                    columns="Event",
+                    aggfunc="sum",
+                    fill_value=0
+                ).reset_index()
+                
+                # Convert date to datetime for proper sorting
+                game_stats['Date'] = pd.to_datetime(game_stats['Date'], format='%d.%m.%Y')
+                
+                # Sort by Date first, then by Scheduled Time
+                game_stats = game_stats.sort_values(['Date', 'Scheduled Time'])
+                
+                # Convert date back to string format for display
+                game_stats['Date'] = game_stats['Date'].dt.strftime('%d.%m.%Y')
+                
+                # Get opponent logos from team_info
+                opponent_logos = {
+                    team: get_base64_image(logo_path) if pd.notna(logo_path) else None
+                    for team, logo_path in zip(team_info['Team'], team_info['LogoPath'])
+                }
+                
+                # Add opponent logo column
+                game_stats['Logo'] = game_stats['Opponent'].map(opponent_logos)
+                
+                # Rename columns for display
+                game_stats = game_stats.rename(columns={
+                    "Date": "Date",
+                    "Opponent": "Opponent",
+                    "Scheduled Time": "Time"
+                })
+                
+                # Reorder columns to put date/time/matchday info first
+                info_columns = ["Date", "Time", "Matchday", "Logo", "Opponent"]
+                event_columns = [col for col in game_stats.columns if col not in info_columns]
+                game_stats = game_stats[info_columns + event_columns]
+                
+                # Calculate totals for each event type
+                totals = game_stats[event_columns].sum()
+                
+                # Create a summary row (with empty string for Logo instead of None)
+                summary_row = pd.DataFrame({
+                    "Date": ["Season Total"],
+                    "Time": [""],
+                    "Matchday": [""],
+                    "Logo": [""],  # Empty string instead of None
+                    "Opponent": [""],
+                    **{col: [totals[col]] for col in event_columns}
+                })
+                
+                # Append the summary row to the game stats
+                game_stats = pd.concat([game_stats, summary_row], ignore_index=True)
+                
+                # Display the table with styled summary row
+                st.dataframe(
+                    game_stats.style.apply(
+                        lambda x: ['background-color: rgba(128, 128, 128, 0.2); font-weight: bold'] * len(x) if x.name == len(game_stats) - 1 else [""] * len(x),
+                        axis=1
+                    ),
+                    hide_index=True,
+                    use_container_width=True,
+                    height=len(game_stats) * 35 + 40,
+                    column_config={
+                        "Logo": st.column_config.ImageColumn(
+                            "Team Logo",
+                            help="Opponent's team logo",
+                            width="small"
+                        ),
+                        "Matchday": st.column_config.TextColumn(
+                            "Matchday",
+                            width="small"
+                        )
+                    }
+                )
+            else:
+                st.write(f"No per-game stats available for {player_name} in {selected_year}")
+        except Exception as e:
+            st.error(f"Error loading per-game stats: {str(e)}")
+            print(f"Detailed error: {str(e)}")
     else:
         st.write(f"No players found for team {selected_team}")
 
