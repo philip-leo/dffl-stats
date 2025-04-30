@@ -61,15 +61,16 @@ st.title("Flag Football Stats Dashboard")
 historic_path = "dffl_stats_historic.csv"
 current_path = "dffl_stats_2025.csv"
 
+# Updated 2025-04-30: Fixed data loading and year filtering
 try:
     print("Loading historic data...")
-    historic_df = pd.read_csv(historic_path, dtype=EXPECTED_COLUMNS)
+    historic_df = pd.read_csv(historic_path)  # Remove dtype mapping
     print(f"Historic data loaded successfully. Shape: {historic_df.shape}")
     historic_df = standardize_dataframe(historic_df, is_german=True)
     print("Historic data standardized successfully")
     
     print("Loading 2025 data...")
-    current_df = pd.read_csv(current_path, dtype=EXPECTED_COLUMNS)
+    current_df = pd.read_csv(current_path)  # Remove dtype mapping
     print(f"2025 data loaded successfully. Shape: {current_df.shape}")
     print("Sample of 2025 data:")
     print(current_df.head())
@@ -78,6 +79,10 @@ try:
     
     # Combine the dataframes
     df = pd.concat([historic_df, current_df], ignore_index=True)
+    
+    # Ensure Year is integer type
+    df["Year"] = df["Year"].astype(int)
+    
     print(f"Combined data shape: {df.shape}")
     print("Sample of combined data:")
     print(df[df['Year'] == 2025].head())
@@ -259,6 +264,12 @@ if "selected_player" not in st.session_state:
 if "selected_team" not in st.session_state:
     st.session_state.selected_team = None
 
+# Get URL parameters using the new API
+params = st.query_params
+if "player" in params and "team" in params:
+    st.session_state.selected_player = int(params["player"])
+    st.session_state.selected_team = params["team"]
+
 # Create tabs for different views
 tab1, tab2, tab3, tab4 = st.tabs(["Top Players", "Player Stats", "Team Stats", "Raw Data"])
 
@@ -333,12 +344,11 @@ with tab1:
         )
         
         # Create a clickable table with Player Number, Profile Picture, Player (Name), Team Logo, Team Name, and Count
-        top_players_display = top_players[["Player Number", "ProfilePicture", "Name", "Team", "Count"]].rename(
+        top_players_display = top_players[["Player Number", "ProfilePicture", "Name", "Count"]].rename(
             columns={
                 "Player Number": "#",
                 "ProfilePicture": "Profile",
-                "Name": "Player",
-                "Team": "Team Name"
+                "Name": "Player"
             }
         ).reset_index(drop=True)
 
@@ -349,7 +359,7 @@ with tab1:
         }
         
         # Add team logo column with base64 encoded images
-        top_players_display.insert(3, "Logo", top_players_display["Team Name"].map(team_logos))
+        top_players_display.insert(1, "Team", top_players["Team"].map(team_logos))
 
         # Display the table with custom column configurations
         st.dataframe(
@@ -360,22 +370,19 @@ with tab1:
             column_config={
                 "#": st.column_config.NumberColumn(
                     help="Player number",
-                    width=50  # Minimal width for player number
+                    width=35  # Even slimmer width for player number
+                ),
+                "Team": st.column_config.ImageColumn(
+                    help="Team logo",
+                    width=45  # Slimmer width for team logo
                 ),
                 "Profile": st.column_config.ImageColumn(
                     help="Player photo",
-                    width=60  # Minimal width for profile picture
+                    width=45  # Slimmer width for profile picture
                 ),
                 "Player": st.column_config.TextColumn(
-                    width="medium"
-                ),
-                "Logo": st.column_config.ImageColumn(
-                    help="Team logo",
-                    width=60  # Minimal width for team logo
-                ),
-                "Team Name": st.column_config.TextColumn(
-                    "Team",
-                    width="medium"
+                    width="small",  # Changed from medium to small
+                    help="Click on player name to view detailed stats"
                 ),
                 "Count": st.column_config.NumberColumn(
                     width="small"
@@ -388,8 +395,8 @@ with tab1:
 with tab2:
     # Dropdown for selecting the team
     teams = sorted(df["Team"].unique())
-    default_team = teams[0]
-    selected_team = st.selectbox("Select Team", teams, index=teams.index(default_team), key="player_stats_team")
+    default_team_index = teams.index(st.session_state.selected_team) if st.session_state.selected_team in teams else 0
+    selected_team = st.selectbox("Select Team", teams, index=default_team_index, key="player_stats_team")
 
     # Get players for the selected team, handling NA values
     team_players = df[df["Team"] == selected_team].copy()
@@ -398,8 +405,9 @@ with tab2:
     players = sorted(team_players["Player Number"].unique())
     
     if len(players) > 0:
-        default_player = players[0]
-        selected_player = st.selectbox("Select Player", players, index=players.index(default_player), key="player_stats_player")
+        # Set default player based on session state or first player
+        default_player_index = players.index(st.session_state.selected_player) if st.session_state.selected_player in players else 0
+        selected_player = st.selectbox("Select Player", players, index=default_player_index, key="player_stats_player")
 
         # Get player details from the mapping
         player_info = player_mapping[
@@ -571,13 +579,12 @@ with tab2:
                 # Rename columns for display
                 game_stats = game_stats.rename(columns={
                     "Date": "Date",
-                    "Opponent": "Opponent",
-                    "Scheduled Time": "Time"
+                    "Opponent": "Opponent"
                 })
                 
-                # Reorder columns to put date/time/matchday info first
-                info_columns = ["Date", "Time", "Matchday", "Logo", "Opponent"]
-                event_columns = [col for col in game_stats.columns if col not in info_columns]
+                # Reorder columns to put date/matchday info first, excluding Time
+                info_columns = ["Date", "Matchday", "Logo", "Opponent"]
+                event_columns = [col for col in game_stats.columns if col not in info_columns + ["Scheduled Time"]]
                 game_stats = game_stats[info_columns + event_columns]
                 
                 # Calculate totals for each event type
@@ -586,7 +593,6 @@ with tab2:
                 # Create a summary row (with empty string for Logo instead of None)
                 summary_row = pd.DataFrame({
                     "Date": ["Season Total"],
-                    "Time": [""],
                     "Matchday": [""],
                     "Logo": [""],  # Empty string instead of None
                     "Opponent": [""],
