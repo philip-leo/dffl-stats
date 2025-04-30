@@ -1,3 +1,6 @@
+# Flag Football Stats Dashboard
+# Updated 2025-04-30: Fixed data loading and year filtering issues
+
 import streamlit as st
 import pandas as pd
 import plotly.express as px
