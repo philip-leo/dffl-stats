@@ -78,55 +78,28 @@ def update_2025_data():
             print("\nApplying year filter using DataTables API...")
             page.evaluate("""() => {
                 const table = jQuery('#table_1').DataTable();
-                
-                // First, set to show all entries
                 table.page.len(-1).draw();
-                
-                // Get the column index for Jahr
                 const yearColumnIdx = table.columns().indexes().toArray()
                     .find(idx => table.column(idx).header().textContent.trim() === 'Jahr');
-                
                 if (yearColumnIdx !== undefined) {
-                    console.log('Found Jahr column at index:', yearColumnIdx);
-                    
-                    // Get unique values in the Jahr column
-                    const years = table.column(yearColumnIdx).data().unique().sort().toArray();
-                    console.log('Available years:', years);
-                    
-                    // Clear existing search
                     table.search('').columns().search('').draw();
-                    
-                    // Apply new search for 2025
                     table.column(yearColumnIdx).search('2025').draw();
-                    
-                    // Log the number of rows and some sample data
-                    const rowCount = table.rows({ search: 'applied' }).count();
-                    console.log('Filtered rows:', rowCount);
-                    
-                    if (rowCount > 0) {
-                        const sampleData = table.rows({ search: 'applied' }).data().slice(0, 5).toArray();
-                        console.log('Sample filtered data:', sampleData);
-                    }
-                } else {
-                    console.log('Could not find Jahr column');
                 }
             }""")
             
-            # Wait for filtering to complete
+            # Wait for filtering to complete and check row count
             time.sleep(2)
-            
-            # Get debugging information
             debug_info = page.evaluate("""() => {
                 const table = jQuery('#table_1').DataTable();
                 const yearColumnIdx = table.columns().indexes().toArray()
                     .find(idx => table.column(idx).header().textContent.trim() === 'Jahr');
-                    
                 return {
                     totalRows: table.rows().count(),
                     filteredRows: table.rows({ search: 'applied' }).count(),
                     yearColumnIndex: yearColumnIdx,
                     currentSearch: table.column(yearColumnIdx).search()[0],
-                    sampleData: table.rows({ search: 'applied' }).data().slice(0, 5).toArray()
+                    sampleData: table.rows({ search: 'applied' }).data().slice(0, 5).toArray(),
+                    allSample: table.rows().data().slice(0, 5).toArray()
                 };
             }""")
             print("\nDebug information:")
@@ -134,7 +107,10 @@ def update_2025_data():
             print(f"Filtered rows: {debug_info['filteredRows']}")
             print(f"Year column index: {debug_info['yearColumnIndex']}")
             print(f"Current search: {debug_info['currentSearch']}")
-            print("Sample data:", debug_info['sampleData'])
+            print("Sample filtered data:", debug_info['sampleData'])
+            if debug_info['filteredRows'] < 50:
+                print("WARNING: Filtered row count is unexpectedly low! Printing first few unfiltered rows for diagnosis:")
+                print(debug_info['allSample'])
             
             # Click the CSV download button and get the data
             print("\nGetting CSV data...")
