@@ -73,22 +73,24 @@ def update_2025_data():
             print("Waiting for table and DataTables to initialize...")
             page.wait_for_selector("#table_1")
             page.wait_for_function("typeof jQuery !== 'undefined' && typeof jQuery('#table_1').DataTable === 'function'")
-            
-            # Apply filter using DataTables API directly
-            print("\nApplying year filter using DataTables API...")
-            page.evaluate("""() => {
-                const table = jQuery('#table_1').DataTable();
-                table.page.len(-1).draw();
-                const yearColumnIdx = table.columns().indexes().toArray()
-                    .find(idx => table.column(idx).header().textContent.trim() === 'Jahr');
-                if (yearColumnIdx !== undefined) {
-                    table.search('').columns().search('').draw();
-                    table.column(yearColumnIdx).search('2025').draw();
-                }
-            }""")
-            
-            # Wait for filtering to complete and check row count
-            time.sleep(2)
+
+            # Find the filter input for the 'Jahr' column and type '2025' with a delay
+            print("\nLocating year filter input and typing '2025'...")
+            # Wait for the filter input to be present
+            year_filter_selector = 'tfoot input[type="number"][placeholder="Jahr"]'
+            page.wait_for_selector(year_filter_selector)
+            # Clear any existing value
+            page.fill(year_filter_selector, "")
+            # Type '2025' with a delay between keystrokes
+            page.type(year_filter_selector, "2025", delay=200)
+            # Wait for the table to update
+            time.sleep(3)
+
+            # Select "All" entries
+            page.select_option('select[name="table_1_length"]', value="-1")
+            time.sleep(2)  # Wait for the table to update
+
+            # Get debugging information after typing
             debug_info = page.evaluate("""() => {
                 const table = jQuery('#table_1').DataTable();
                 const yearColumnIdx = table.columns().indexes().toArray()
@@ -102,7 +104,7 @@ def update_2025_data():
                     allSample: table.rows().data().slice(0, 5).toArray()
                 };
             }""")
-            print("\nDebug information:")
+            print("\nDebug information after typing:")
             print(f"Total rows in table: {debug_info['totalRows']}")
             print(f"Filtered rows: {debug_info['filteredRows']}")
             print(f"Year column index: {debug_info['yearColumnIndex']}")
