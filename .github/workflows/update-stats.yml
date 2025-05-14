@@ -29,7 +29,16 @@ jobs:
     - name: Update 2025 stats
       run: |
         python update_2025_stats.py
-        
+
+    - name: Debug: Show 2025 stats file info
+      run: |
+        echo "Line count in dffl_stats_2025.csv:"
+        wc -l dffl_stats_2025.csv
+        echo "First 10 lines of dffl_stats_2025.csv:"
+        head -10 dffl_stats_2025.csv
+        echo "Last 10 lines of dffl_stats_2025.csv:"
+        tail -10 dffl_stats_2025.csv
+
     - name: Commit and push if changes
       run: |
         git config --local user.email "github-actions[bot]@users.noreply.github.com"
