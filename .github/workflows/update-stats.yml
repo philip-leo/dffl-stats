@@ -1,0 +1,49 @@
+name: Update DFFL Stats
+
+on:
+  schedule:
+    - cron: '0 9-15 * * 6'  # Every hour from 9 AM to 3 PM on Saturday
+    - cron: '0 9-15 * * 0'  # Every hour from 9 AM to 3 PM on Sunday
+  workflow_dispatch:  # Allows manual triggering
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pandas playwright
+          python -m playwright install chromium
+
+      - name: Update 2025 stats
+        run: |
+          python update_2025_stats.py
+        timeout-minutes: 5
+
+      - name: 'Debug: Show 2025 stats file info'
+        run: |
+          echo "Line count in dffl_stats_2025.csv:"
+          wc -l dffl_stats_2025.csv
+          echo "First 10 lines of dffl_stats_2025.csv:"
+          head -10 dffl_stats_2025.csv
+          echo "Last 10 lines of dffl_stats_2025.csv:"
+          tail -10 dffl_stats_2025.csv
+
+      - name: Commit and push if changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add dffl_stats_2025.csv
+          git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update stats $(date '+%Y-%m-%d %H:%M:%S')" && git push)
