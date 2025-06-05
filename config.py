@@ -54,18 +54,23 @@ def standardize_dataframe(df, is_german=True):
     
     # Rename columns if the input is in German
     if is_german:
-        df = df.rename(columns=COLUMN_MAPPING)
+        # Only rename columns that exist in the dataframe
+        rename_dict = {k: v for k, v in COLUMN_MAPPING.items() if k in df.columns}
+        df = df.rename(columns=rename_dict)
     
-    # Clean player numbers
-    df['Player Number'] = df['Player Number'].apply(clean_player_number)
-    df['Player Number'] = df['Player Number'].astype('Int64')
+    # Clean player numbers if the column exists
+    if 'Player Number' in df.columns:
+        df['Player Number'] = df['Player Number'].apply(clean_player_number)
+        df['Player Number'] = df['Player Number'].astype('Int64')
     
-    # Ensure correct data types for other columns
-    df = df.astype({
-        'Team': str,
-        'Count': int,
-        'Event': str,
-        'Year': int
-    })
+    # Ensure correct data types for columns that exist
+    type_conversions = {}
+    for col, dtype in EXPECTED_COLUMNS.items():
+        if col in df.columns:
+            type_conversions[col] = dtype
     
-    return df 
+    # Apply type conversions only for columns that exist
+    if type_conversions:
+        df = df.astype(type_conversions)
+    
+    return df

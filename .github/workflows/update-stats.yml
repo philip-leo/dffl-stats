@@ -32,7 +32,7 @@ jobs:
           python update_2025_stats.py
         timeout-minutes: 5
 
-      - name: 'Debug: Show 2025 stats file info'
+      - name: 'Debug: Show stats files info'
         run: |
           echo "Line count in dffl_stats_2025.csv:"
           wc -l dffl_stats_2025.csv
@@ -40,10 +40,17 @@ jobs:
           head -10 dffl_stats_2025.csv
           echo "Last 10 lines of dffl_stats_2025.csv:"
           tail -10 dffl_stats_2025.csv
+          
+          echo "\n\nLine count in dffl_stats_detail_2025.csv:"
+          wc -l dffl_stats_detail_2025.csv || echo "File not found"
+          echo "First 10 lines of dffl_stats_detail_2025.csv:"
+          head -10 dffl_stats_detail_2025.csv || echo "File not found"
+          echo "Last 10 lines of dffl_stats_detail_2025.csv:"
+          tail -10 dffl_stats_detail_2025.csv || echo "File not found"
 
       - name: Commit and push if changes
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add dffl_stats_2025.csv
+          git add dffl_stats_2025.csv dffl_stats_detail_2025.csv
           git diff --quiet && git diff --staged --quiet || (git commit -m "Auto-update stats $(date '+%Y-%m-%d %H:%M:%S')" && git push)
